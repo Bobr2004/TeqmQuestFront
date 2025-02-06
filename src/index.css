@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+button:not([data-disabled="true"]) {
+  cursor: pointer !important;
+}

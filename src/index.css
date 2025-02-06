@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
 button:not([data-disabled="true"]) {
-  cursor: pointer !important;
+   cursor: pointer !important;
+}
+
+/* tailwind-style utils classes */
+
+.radix-toaster {
+   background-color: var(--color-background) !important;
+   border: 1px solid;
+   color: var(--gray-11) !important;
+   border-color: var(--gray-6) !important;
+
+} 
+
+
+/* .radix-toaster {
+   background-color: var(--accent-1) !important;
+   border: 1px solid;
+   color: var(--accent-12) !important;
+   border-color: var(--accent-6) !important;
+} */
+
+.bg-radix {
+   background-color: var(--color-background) !important;
+}
+
+.border-radix {
+   border-color: var(--code-block-border) !important;
 }

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@import "primeicons/primeicons.css";
+
 button:not([data-disabled="true"]) {
    cursor: pointer !important;
 }
@@ -11,9 +13,7 @@ button:not([data-disabled="true"]) {
    border: 1px solid;
    color: var(--gray-11) !important;
    border-color: var(--gray-6) !important;
-
-} 
-
+}
 
 /* .radix-toaster {
    background-color: var(--accent-1) !important;

@@ -12,9 +12,16 @@ export const authApi = createApi({
     login: builder.mutation<User, loginData>({
       query: (body) => ({ url: 'login', body, method: 'POST' })
     }),
-    logout: builder.query<string, void>({ query: () => ({ url: 'logout' }) })
+    logout: builder.query<string, void>({ query: () => ({ url: 'logout' }) }),
+    changeAvatar: builder.mutation<unknown, FormData>({
+      query: (body) => ({ url: 'user/updateImage', body, method: 'PATCH' })
+    })
   })
 });
 
-export const { useSignupMutation, useLoginMutation, useLazyLogoutQuery } =
-  authApi;
+export const {
+  useSignupMutation,
+  useLoginMutation,
+  useLazyLogoutQuery,
+  useChangeAvatarMutation
+} = authApi;

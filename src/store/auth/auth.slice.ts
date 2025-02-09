@@ -4,14 +4,21 @@ export interface User {
   id: number;
   email: string;
   username: string;
-  image: string;
+  image?: string;
 }
 
 interface AuthState {
   user: User | null;
 }
 
-const initialState: AuthState = { user: null };
+// REMOVE LATER
+const mockUser: User = {
+  id: 1,
+  email: '1@gmail.com',
+  username: 'urgulibdingus'
+};
+
+const initialState: AuthState = { user: mockUser };
 
 const authSlice = createSlice({
   name: 'auth',

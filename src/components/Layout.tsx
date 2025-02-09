@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../store/store';
 import { unsetUser } from '../store/auth/auth.slice';
 import { useLazyLogoutQuery } from '../store/auth/auth.api';
 
+import UserAvatar from './UserAvatar';
+
 function Layout() {
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -12,6 +14,7 @@ function Layout() {
 
   const handleLogout = () => {
     if (!isLoading) {
+      dispatch(unsetUser()); // REMOVE LATER
       logout()
         .unwrap()
         .then(() => dispatch(unsetUser()))
@@ -28,7 +31,10 @@ function Layout() {
           </h2>
           <ul className="flex gap-2">
             {user ? (
-              <Button onClick={handleLogout}>Logout</Button>
+              <>
+                <Button onClick={handleLogout}>Logout</Button>
+                <UserAvatar />
+              </>
             ) : (
               <>
                 <NavLink to={routes.login}>

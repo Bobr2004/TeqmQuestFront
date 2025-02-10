@@ -56,7 +56,7 @@ const UserAvatar = () => {
                   <Button
                      variant="ghost"
                      color="gray"
-                     className="!p-1 !flex !gap-2 !items-center"
+                     className="!p-1 !flex !gap-2 !items-center !-mt-1"
                   >
                     
                      <Avatar fallback="A" src={user.image} size="2" />
@@ -67,11 +67,11 @@ const UserAvatar = () => {
             content={
                <div className="flex flex-col gap-3">
                   <p>Username: {user.username}</p>
-                  <Button asChild>
+                  <Button asChild variant="soft">
                      <NavLink to={routes.home}>Settings</NavLink>
                   </Button>
                   <Modal
-                     trigger={<Button color="red">Logout</Button>}
+                     trigger={<Button color="red" variant="soft">Logout</Button>}
                      content={
                         <>
                            <Dialog.Title className="text-center">

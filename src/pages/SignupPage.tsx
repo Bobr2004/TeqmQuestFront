@@ -22,7 +22,7 @@ const signUpScheme = z
       password: z
          .string()
          .nonempty("Password is not specified")
-         .min(6, "Password must be at least 6 characters"),
+         .min(8, "Password must be at least 8 characters"),
       repeatPassword: z.string().nonempty("Please repeat your password"),
       image: z.string().optional()
    })
@@ -48,12 +48,13 @@ const SignUpPage = () => {
 
    const onSubmit: SubmitHandler<signUpData> = ({
       repeatPassword,
+      image,
       ...data
    }) => {
       if (!isSubmitting && !isLoading) {
          const fd = new FormData();
          fd.append("user", JSON.stringify(data));
-         if (data.image) fd.append("image", data.image);
+         if (image) fd.append("image", image);
 
          signup(fd)
             .unwrap()

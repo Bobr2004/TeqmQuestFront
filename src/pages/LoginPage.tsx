@@ -14,7 +14,7 @@ const loginScheme = z.object({
    password: z
       .string()
       .nonempty("Password is not specified")
-      .min(6, "Remember your password — it must be at least 6 characters")
+      .min(8, "Remember your password — it must be at least 8 characters")
 });
 
 export type loginData = z.infer<typeof loginScheme>;

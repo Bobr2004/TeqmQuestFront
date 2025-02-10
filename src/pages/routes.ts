@@ -1,7 +1,9 @@
 const routes = {
    home: "/",
    login: "login",
-   signup: "signup"
+   signup: "signup",
+   settings: "settings",
+   editQuests: "edit-quests"
 };
 
 export { routes };

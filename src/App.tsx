@@ -11,6 +11,7 @@ import { routes } from "./pages/routes";
 import SettingsPage from "./pages/SettingsPage";
 import EditQuestsPage from "./pages/EditQuestsPage/EditQuestsPage";
 import EditQuestPage from "./pages/EditQuestPage/EditQuestPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function Router() {
    return (
@@ -31,7 +32,7 @@ function Router() {
 
                {/* Quests */}
 
-               <Route path="*" element={<>404</>} />
+               <Route path="*" element={<NotFoundPage/>} />
             </Route>
          </Routes>
       </BrowserRouter>

@@ -39,7 +39,7 @@ function EditQuestCard({
                         >
                            Delete
                         </Button>
-                        <Link to={routes.toEditQuest(id)}>
+                        <Link to={routes.toEditQuest(String(id))}>
                            <Button size="1" variant="soft">
                               Edit <p className="pi pi-hammer"></p>
                            </Button>

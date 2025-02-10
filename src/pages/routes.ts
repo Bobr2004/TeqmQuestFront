@@ -4,7 +4,9 @@ const routes = {
    signup: "/signup",
    settings: "/settings",
    editQuests: "/edit-quests",
-   toEditQuest: (id: number) => `/edit-quests/${id}`
+   toEditQuest: (id: string) => `/edit-quests/${id}`,
+
+   toQuest: (id: string) => `/quest/${id}`
 };
 
 export { routes };

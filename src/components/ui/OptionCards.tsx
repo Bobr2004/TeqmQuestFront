@@ -19,16 +19,16 @@ type OptionsProps =
         items?: never;
      };
 
-function OptionCards({ items, stringItems, ...props }: OptionsProps) {
+function OptionCards({ items, stringItems, row, ...props }: OptionsProps & {row?: boolean}) {
    return (
-      <RadioCards.Root className="!grid !grid-cols-2" {...props}>
+      <RadioCards.Root className={`${row ? "!flex !gap-1" : "!grid !grid-cols-2"}`} {...props}>
          {stringItems &&
             stringItems.map((item) => (
-               <RadioCards.Item value={item}>{item}</RadioCards.Item>
+               <RadioCards.Item value={item} className={`${row ? "!py-1 px-1.5": ""}`}>{item}</RadioCards.Item>
             ))}
          {items &&
             items.map(({ value, title }) => (
-               <RadioCards.Item value={value}>{title}</RadioCards.Item>
+               <RadioCards.Item value={value} className={`${row ? "!py-1 px-1.5": ""}`}>{title}</RadioCards.Item>
             ))}
       </RadioCards.Root>
    );

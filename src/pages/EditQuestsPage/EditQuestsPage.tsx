@@ -7,12 +7,9 @@ function EditQuestsPage() {
    const [localQuestsState, setLocalQuestsState] = useState<EditableQuest[]>(
       () => {
          const localQuestsString = localStorage.getItem("localQuests");
-         let localQuests: EditableQuest[] = [];
-         if (localQuestsString) localQuests = JSON.parse(localQuestsString);
-         localQuests = localQuests.sort(
-            (quest1, quest2) => quest2.id - quest1.id
-         );
-         return localQuests;
+         if (!localQuestsString) return [];
+         const localQuests: EditableQuest[] = JSON.parse(localQuestsString);
+         return localQuests.sort((quest1, quest2) => quest2.id - quest1.id);
       }
    );
 
@@ -30,7 +27,7 @@ function EditQuestsPage() {
          <section className="container mx-auto p-4">
             <h2 className="font-bold text-xl">Unpublished quests:</h2>
 
-            {localQuestsState ? (
+            {localQuestsState && localQuestsState.length ? (
                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full py-2">
                   {localQuestsState.map((localQuest) => (
                      <li key={localQuest.id}>

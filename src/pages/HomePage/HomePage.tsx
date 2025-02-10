@@ -2,7 +2,8 @@ import toast from "react-hot-toast";
 import QuestCard from "./QuestCard";
 import Modal from "../../components/ui/Modal";
 import { useAppSelector } from "../../store/store";
-import NewQuestForm from "./NewQuestForm";
+import QuestForm from "../../components/QuestForm";
+import { routes } from "../routes";
 
 const HomePage = () => {
    const { user } = useAppSelector((state) => state.auth);
@@ -18,7 +19,7 @@ const HomePage = () => {
                         <NewQuestCard />
                      </div>
                   }
-                  content={<NewQuestForm />}
+                  content={<QuestForm redirect={routes.editQuests} />}
                />
             ) : (
                <div onClick={() => toast.error("You are not logged in!")}>

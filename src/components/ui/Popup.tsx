@@ -1,9 +1,9 @@
-import { Button, Popover, TextArea } from "@radix-ui/themes";
+import { Popover } from "@radix-ui/themes";
 
 type PopupProps = {
    trigger: React.ReactNode;
    content: React.ReactNode;
-   width?: string; 
+   width?: string;
 };
 
 function Popup({ trigger, content, width }: PopupProps) {
@@ -15,21 +15,4 @@ function Popup({ trigger, content, width }: PopupProps) {
    );
 }
 
-const ExamplePopup = (
-   <Popup
-      trigger={<Button variant="soft">Comment</Button>}
-      content={
-         <>
-            <TextArea placeholder="Write a comment…" style={{ height: 80 }} />
-            <div className="mt-3 flex gap-3">
-               <Popover.Close>
-                  <Button>Comment</Button>
-               </Popover.Close>
-            </div>
-         </>
-      }
-   />
-);
-
 export default Popup;
-

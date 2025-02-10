@@ -1,4 +1,4 @@
-import { Button, Card } from "@radix-ui/themes";
+import { Card } from "@radix-ui/themes";
 import { Link } from "react-router";
 import { routes } from "../pages/routes";
 

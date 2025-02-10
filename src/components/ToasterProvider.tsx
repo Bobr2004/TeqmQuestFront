@@ -27,11 +27,4 @@ function ToasterProvider() {
    );
 }
 
-// Example How to use toasts
-import toast from "react-hot-toast";
-
-const triggerToast = () => toast("Toast");
-const triggerError = () => toast.error("Error");
-const triggerSuccess = () => toast.success("Success");
-
 export default ToasterProvider;

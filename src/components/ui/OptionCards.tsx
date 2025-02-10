@@ -1,5 +1,4 @@
 import { RadioCards } from "@radix-ui/themes";
-import { useState } from "react";
 
 type OptionItem = {
    value: string;
@@ -32,17 +31,6 @@ function OptionCards({ items, stringItems, ...props }: OptionsProps) {
                <RadioCards.Item value={value}>{title}</RadioCards.Item>
             ))}
       </RadioCards.Root>
-   );
-}
-
-function ExampleOptionCards() {
-   const [state, setState] = useState("Nigga");
-   return (
-      <OptionCards
-         stringItems={["Nigga", "Pedro", "Chinazes"]}
-         value={state}
-         onValueChange={setState}
-      />
    );
 }
 

@@ -3,9 +3,9 @@ import { Button, Dialog, TextArea, TextField } from "@radix-ui/themes";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import ErrorFormMessage from "../../components/ErrorFormMessage";
-import { useCreateQuestMutation } from "../../store/quest/quest.api";
+// import { useCreateQuestMutation } from "../../store/quest/quest.api";
 import { useNavigate } from "react-router";
-import { v4 as uuidv4, v4 } from "uuid";
+import { v4 } from "uuid";
 import toast from "react-hot-toast";
 import { routes } from "../routes";
 
@@ -31,7 +31,7 @@ function wait(seconds: number) {
 }
 
 const NewQuest = () => {
-   const [createQuest, { isLoading }] = useCreateQuestMutation();
+   //  const [createQuest, { isLoading }] = useCreateQuestMutation();
    const navigate = useNavigate();
 
    const {

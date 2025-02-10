@@ -1,5 +1,4 @@
 import { SegmentedControl } from "@radix-ui/themes";
-import { useState } from "react";
 
 type SegmentItem = {
    value: string;
@@ -37,17 +36,6 @@ function Segments({ items, stringItems, ...props }: SegmentsProps) {
             ))}
       </SegmentedControl.Root>
    );
-}
-
-function ExampleSegments() {
-   const [state, setState] = useState("Nigga");
-      return (
-         <Segments
-            stringItems={["Nigga", "Pedro", "Chinazes"]}
-            value={state}
-            onValueChange={setState}
-         />
-      );
 }
 
 export default Segments;

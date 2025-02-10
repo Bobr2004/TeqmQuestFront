@@ -1,9 +1,9 @@
-import { ChangeEvent, useRef } from "react";
+// import { ChangeEvent, useRef } from "react";
 import {
-   useChangeAvatarMutation,
+   //  useChangeAvatarMutation,
    useLazyLogoutQuery
 } from "../store/auth/auth.api";
-import { Avatar, Button, Card, Dialog, Popover } from "@radix-ui/themes";
+import { Avatar, Button, Dialog } from "@radix-ui/themes";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import Popup from "./ui/Popup";
 import { NavLink } from "react-router";
@@ -16,27 +16,27 @@ const UserAvatar = () => {
    const dispatch = useAppDispatch();
    const [logout, { isLoading }] = useLazyLogoutQuery();
 
-  //  const [changeAvatar, { isLoading: isAvatarChanging }] =
-  //     useChangeAvatarMutation();
-  //  const fileInputRef = useRef<HTMLInputElement>(null);
+   //  const [changeAvatar, { isLoading: isAvatarChanging }] =
+   //     useChangeAvatarMutation();
+   //  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  //  const handleChangeAvatar = () => {
-  //     if (fileInputRef.current && !isAvatarChanging) {
-  //        fileInputRef.current.click();
-  //     }
-  //  };
+   //  const handleChangeAvatar = () => {
+   //     if (fileInputRef.current && !isAvatarChanging) {
+   //        fileInputRef.current.click();
+   //     }
+   //  };
 
-  //  const handleSaveAvatar = (e: ChangeEvent<HTMLInputElement>) => {
-  //     if (e.target.files && e.target.files.length) {
-  //        const fd = new FormData();
-  //        fd.append("image", e.target.files[0]);
+   //  const handleSaveAvatar = (e: ChangeEvent<HTMLInputElement>) => {
+   //     if (e.target.files && e.target.files.length) {
+   //        const fd = new FormData();
+   //        fd.append("image", e.target.files[0]);
 
-  //        changeAvatar(fd)
-  //           .unwrap()
-  //           .then(() => {})
-  //           .catch(console.log);
-  //     }
-  //  };
+   //        changeAvatar(fd)
+   //           .unwrap()
+   //           .then(() => {})
+   //           .catch(console.log);
+   //     }
+   //  };
 
    const handleLogout = () => {
       if (!isLoading) {
@@ -58,7 +58,6 @@ const UserAvatar = () => {
                      color="gray"
                      className="!p-1 !flex !gap-2 !items-center !-mt-1"
                   >
-                    
                      <Avatar fallback="A" src={user.image} size="2" />
                      <p className="mr-1">{user.username}</p>
                   </Button>
@@ -71,7 +70,11 @@ const UserAvatar = () => {
                      <NavLink to={routes.home}>Settings</NavLink>
                   </Button>
                   <Modal
-                     trigger={<Button color="red" variant="soft">Logout</Button>}
+                     trigger={
+                        <Button color="red" variant="soft">
+                           Logout
+                        </Button>
+                     }
                      content={
                         <>
                            <Dialog.Title className="text-center">

@@ -15,7 +15,7 @@ interface AuthState {
 const mockUser: User = {
   id: 1,
   email: '1@gmail.com',
-  username: 'urgulibdingus'
+  username: 'AntonUA'
 };
 
 const initialState: AuthState = { user: mockUser };

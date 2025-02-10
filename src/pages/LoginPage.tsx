@@ -45,7 +45,7 @@ const LoginPage = () => {
    };
 
    return (
-      <div className="container mx-auto p-4">
+      <section className="container mx-auto p-4">
          <form
             onSubmit={handleSubmit(onSubmit)}
             className="max-w-[450px] mx-auto p-4 flex flex-col gap-3"
@@ -85,7 +85,7 @@ const LoginPage = () => {
                </Button>
             </div>
          </div>
-      </div>
+      </section>
    );
 };
 

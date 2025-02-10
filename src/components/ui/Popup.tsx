@@ -3,13 +3,14 @@ import { Button, Popover, TextArea } from "@radix-ui/themes";
 type PopupProps = {
    trigger: React.ReactNode;
    content: React.ReactNode;
+   width?: string; 
 };
 
-function Popup({ trigger, content }: PopupProps) {
+function Popup({ trigger, content, width }: PopupProps) {
    return (
       <Popover.Root>
          <Popover.Trigger>{trigger}</Popover.Trigger>
-         <Popover.Content width="360px">{content}</Popover.Content>
+         <Popover.Content width={width}>{content}</Popover.Content>
       </Popover.Root>
    );
 }

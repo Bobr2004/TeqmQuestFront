@@ -3,6 +3,7 @@ import { Button, Dialog, TextField } from "@radix-ui/themes";
 type ModalProps = {
    trigger: React.ReactNode;
    content: React.ReactNode;
+   // maxWidth?: string;
 };
 
 function Modal({ trigger, content }: ModalProps) {

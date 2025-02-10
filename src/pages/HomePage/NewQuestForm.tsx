@@ -5,22 +5,15 @@ import { z } from "zod";
 import ErrorFormMessage from "../../components/ErrorFormMessage";
 // import { useCreateQuestMutation } from "../../store/quest/quest.api";
 import { useNavigate } from "react-router";
-import { v4 } from "uuid";
 import toast from "react-hot-toast";
 import { routes } from "../routes";
+import { EditableQuest } from "../EditQuestsPage/editQuestTypes";
 
 const questScheme = z.object({
    name: z.string().nonempty("Provide quest name"),
    description: z.string().nonempty("Provide quest description"),
    time: z.number().optional()
 });
-
-type LocalStorageQuest = {
-   id: string;
-   name: string;
-   description: string;
-   time: number | null;
-};
 
 export type questData = z.infer<typeof questScheme>;
 
@@ -30,7 +23,7 @@ function wait(seconds: number) {
    });
 }
 
-const NewQuest = () => {
+const NewQuestForm = () => {
    //  const [createQuest, { isLoading }] = useCreateQuestMutation();
    const navigate = useNavigate();
 
@@ -49,11 +42,11 @@ const NewQuest = () => {
       time
    }) => {
       const localQuestsString = localStorage.getItem("localQuests");
-      let localQuests: LocalStorageQuest[] = [];
+      let localQuests: EditableQuest[] = [];
       if (localQuestsString) localQuests = JSON.parse(localQuestsString);
 
       const questToSave = {
-         id: v4(),
+         id: localQuests.length,
          name,
          description,
          time: time || null
@@ -137,4 +130,4 @@ const NewQuest = () => {
    );
 };
 
-export default NewQuest;
+export default NewQuestForm;

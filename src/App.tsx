@@ -9,6 +9,8 @@ import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage/HomePage";
 import { routes } from "./pages/routes";
 import SettingsPage from "./pages/SettingsPage";
+import EditQuestsPage from "./pages/EditQuestsPage/EditQuestsPage";
+import EditQuestPage from "./pages/EditQuestPage/EditQuestPage";
 
 function Router() {
    return (
@@ -16,9 +18,19 @@ function Router() {
          <Routes>
             <Route path={routes.home} element={<Layout />}>
                <Route index element={<HomePage />} />
+               {/* User */}
                <Route path={routes.signup} element={<SignupPage />} />
                <Route path={routes.login} element={<LoginPage />} />
                <Route path={routes.settings} element={<SettingsPage />} />
+               {/* Quest creation */}
+               <Route path={routes.editQuests} element={<EditQuestsPage />} />
+               <Route
+                  path={`${routes.editQuests}/:id`}
+                  element={<EditQuestPage />}
+               />
+
+               {/* Quests */}
+
                <Route path="*" element={<>404</>} />
             </Route>
          </Routes>

@@ -22,7 +22,7 @@ function ToasterProvider() {
                }
             }
          }}
-         position="bottom-right"
+         position="bottom-left"
       />
    );
 }

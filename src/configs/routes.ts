@@ -1,9 +1,19 @@
+import axios from "axios";
+
 export const routes = {
-  home: '/',
-  login: '/login',
-  signup: '/signup',
-  settings: '/settings',
-  editQuests: '/edit-quests',
-  toEditQuest: (id: string) => `/edit-quests/${id}`,
-  toQuest: (id: string) => `/quest/${id}`
+   home: "/",
+   login: "/login",
+   signup: "/signup",
+   settings: "/settings",
+   editQuests: "/edit-quests",
+   toEditQuest: (id: string) => `/edit-quests/${id}`,
+   toQuest: (id: string) => `/quest/${id}`
 };
+
+export const backendAPI = (token: string | null) =>
+   axios.create({
+      baseURL: "http://ec2-13-60-43-26.eu-north-1.compute.amazonaws.com",
+      headers: {
+         Authorization: `Bearer ${token}`
+      }
+   });

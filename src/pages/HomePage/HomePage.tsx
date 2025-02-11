@@ -1,15 +1,14 @@
 import toast from "react-hot-toast";
-import QuestCard, { QuestCardProps } from "./QuestCard";
+import QuestCard from "./QuestCard";
 import Modal from "../../components/ui/Modal";
 import { useAppSelector } from "../../store/store";
 import QuestForm from "../../components/QuestForm";
-import { useEffect, useState } from "react";
 import { useGetAllQuestsQuery } from "../../store/quest/quest.api";
 
 const HomePage = () => {
-   const { user } = useAppSelector((state) => state.auth);
+   const user = useAppSelector((state) => state.auth.user);
 
-   const { data: quests, } = useGetAllQuestsQuery();
+   const { data: quests } = useGetAllQuestsQuery();
 
    return (
       <section className="container mx-auto p-4">

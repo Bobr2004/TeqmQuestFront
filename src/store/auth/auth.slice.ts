@@ -12,11 +12,11 @@ interface AuthState {
 }
 
 // REMOVE LATER
-const mockUser: User = {
-  id: 1,
-  email: '1@gmail.com',
-  username: 'AntonUA'
-};
+// const mockUser: User = {
+//   id: 1,
+//   email: '1@gmail.com',
+//   username: 'AntonUA'
+// };
 
 const initialState: AuthState = { user: null };
 

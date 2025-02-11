@@ -1,55 +1,94 @@
 import { Button, Checkbox, Dialog, TextField } from "@radix-ui/themes";
-import { z } from "zod";
-import ErrorFormMessage from "../../components/ErrorFormMessage";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Segments from "../../components/ui/Segments";
 import { useState } from "react";
+import ImageInput from "../../components/ImageInput";
 
-const taskScheme = z.object({
-   taskName: z.string().nonempty("Provide task name"),
-   media: z.string(),
-   openAnswer: z.string().nonempty("Provide open answer"),
-   optionA: z
-      .string()
-      .nonempty("Provide option A")
-      .max(20, "Option must be less than 20 characters"),
-   optionB: z
-      .string()
-      .nonempty("Provide option B")
-      .max(20, "Option must be less than 20 characters"),
-   optionC: z
-      .string()
-      .nonempty("Provide option C")
-      .max(20, "Option must be less than 20 characters"),
-   optionD: z
-      .string()
-      .nonempty("Provide option D")
-      .max(20, "Option must be less than 20 characters")
-});
+type TaskFormProps = {
+   addNewTask: (task: any) => void;
+};
 
-type taskData = z.infer<typeof taskScheme>;
+function TaskForm({ addNewTask }: TaskFormProps) {
+   const [taskTitle, setTaskTitle] = useState("");
 
-function TaskForm() {
-   const {
-      register,
-      handleSubmit,
-      formState: { errors, isSubmitting }
-   } = useForm<taskData>({
-      resolver: zodResolver(taskScheme)
-   });
+   const [image, setImage] = useState<File | null>(null);
 
-   const onSubmit: SubmitHandler<taskData> = async () => {};
-
+   const [openAnswer, setOpenAnswer] = useState("");
    const [taskMode, setTaskMode] = useState<"Open answer" | "Options">(
       "Options"
    );
 
+   const [options, setOptions] = useState([
+      {
+         id: 1,
+         text: "",
+         isTrue: true
+      },
+      {
+         id: 2,
+         text: "",
+         isTrue: false
+      },
+      {
+         id: 3,
+         text: "",
+         isTrue: false
+      },
+      {
+         id: 4,
+         text: "",
+         isTrue: false
+      }
+   ]);
+
+   const changeOptionText = (optionId: number) => (value: string) => {
+      setOptions((opts) =>
+         opts.map((opt) =>
+            opt.id === optionId ? { ...opt, text: value } : { ...opt }
+         )
+      );
+   };
+
+   const getOptionText = (optionId: number) =>
+      options.find((opt) => opt.id === optionId)?.text;
+
+   const changeOptionIsTrue = (optionId: number) => {
+      setOptions((opts) =>
+         opts.map((opt) =>
+            opt.id === optionId
+               ? { ...opt, isTrue: true }
+               : { ...opt, isTrue: false }
+         )
+      );
+   };
+   const getOptionIsTrue = (optionId: number) =>
+      options.find((opt) => opt.id === optionId)?.isTrue;
+
+   const submit = () => {
+      let taskToSubmit: any;
+      if (taskMode === "Open answer") {
+         taskToSubmit = {
+            id: new Date().getTime(),
+            title: taskTitle,
+            image,
+            openAnswer
+         };
+      }
+      if (taskMode === "Options") {
+         taskToSubmit = {
+            id: new Date().getTime(),
+            title: taskTitle,
+            image,
+            options: options.map(({ id, ...other }) => other)
+         };
+      }
+      addNewTask(taskToSubmit);
+   };
+
    return (
       <div>
          <form
-            onSubmit={handleSubmit(onSubmit)}
             className="max-w-[450px] mx-auto flex flex-col gap-3"
+            onSubmit={(e) => e.preventDefault()}
          >
             <Dialog.Title className="text-2xl font-bold text-center">
                Add task
@@ -57,13 +96,12 @@ function TaskForm() {
             <label>
                <p className="font-bold">Task name:</p>
                <TextField.Root
-                  {...register("taskName")}
+                  value={taskTitle}
+                  onChange={({ target }) => setTaskTitle(target.value)}
                   placeholder="Who was second president of Ukraine?"
                />
             </label>
-            {errors.taskName && (
-               <ErrorFormMessage>{errors.taskName.message}</ErrorFormMessage>
-            )}
+            <ImageInput setImageState={setImage} />
             <div>
                <Segments
                   stringItems={["Open answer", "Options"]}
@@ -75,53 +113,34 @@ function TaskForm() {
                <label>
                   <p className="font-bold">Answer:</p>
                   <TextField.Root
-                     {...register("openAnswer")}
+                     value={openAnswer}
+                     onChange={({ target }) => setOpenAnswer(target.value)}
                      placeholder="Donald Trump"
                   />
                </label>
             )}
             {taskMode === "Options" && (
                <div className="flex flex-col gap-3">
-                  <label>
-                     <div className="flex items-center gap-2">
-                        <p className="font-bold">Option A:</p>
-                        <Checkbox />
-                     </div>
-                     <TextField.Root
-                        {...register("optionA")}
-                        placeholder="Volodimir Zelensky"
-                     />
-                  </label>
-                  <label>
-                     <div className="flex items-center gap-2">
-                        <p className="font-bold">Option A:</p>
-                        <Checkbox />
-                     </div>
-                     <TextField.Root
-                        {...register("optionA")}
-                        placeholder="Volodimir Zelensky"
-                     />
-                  </label>
-                  <label>
-                     <div className="flex items-center gap-2">
-                        <p className="font-bold">Option A:</p>
-                        <Checkbox />
-                     </div>
-                     <TextField.Root
-                        {...register("optionA")}
-                        placeholder="Volodimir Zelensky"
-                     />
-                  </label>
-                  <label>
-                     <div className="flex items-center gap-2">
-                        <p className="font-bold">Option A:</p>
-                        <Checkbox />
-                     </div>
-                     <TextField.Root
-                        {...register("optionA")}
-                        placeholder="Volodimir Zelensky"
-                     />
-                  </label>
+                  {options.map((option) => (
+                     <label key={option.id}>
+                        <div className="flex items-center gap-2">
+                           <p className="font-bold">Option {option.id}:</p>
+                           <Checkbox
+                              checked={getOptionIsTrue(option.id)}
+                              onCheckedChange={() =>
+                                 changeOptionIsTrue(option.id)
+                              }
+                           />
+                        </div>
+                        <TextField.Root
+                           value={getOptionText(option.id)}
+                           onChange={({ target }) =>
+                              changeOptionText(option.id)(target.value)
+                           }
+                           placeholder="Volodimir Zelensky"
+                        />
+                     </label>
+                  ))}
                </div>
             )}
             <div className="flex justify-center gap-3 ">
@@ -130,7 +149,7 @@ function TaskForm() {
                      Cancel
                   </Button>
                </Dialog.Close>
-               <Button loading={isSubmitting}>Submit</Button>
+               <Button onClick={submit}>Submit</Button>
             </div>
          </form>
       </div>

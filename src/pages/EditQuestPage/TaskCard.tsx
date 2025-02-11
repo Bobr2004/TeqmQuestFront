@@ -1,7 +1,7 @@
 import { Button, Card } from "@radix-ui/themes";
 
 type Option = {
-   text: string;
+   title: string;
    isTrue: boolean;
 };
 
@@ -47,7 +47,7 @@ function TaskCard({
                            option.isTrue ? "" : " text-[var(--gray-10)]"
                         } border border-[var(--gray-4)] rounded-[var(--radius-2)] flex justify-between gap-2 items-center py-0.5 px-2`}
                      >
-                        <p>{option.text}{" "}</p>
+                        <p>{option.title}{" "}</p>
                         {option.isTrue && (
                            <p className="pi pi-check-circle"></p>
                         )}

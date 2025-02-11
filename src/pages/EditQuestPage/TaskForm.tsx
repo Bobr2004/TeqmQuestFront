@@ -1,11 +1,18 @@
 import { Button, Checkbox, Dialog, TextField } from "@radix-ui/themes";
 import Segments from "../../components/ui/Segments";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ImageInput from "../../components/ImageInput";
+import toast from "react-hot-toast";
 
 type TaskFormProps = {
    addNewTask: (task: any) => void;
 };
+
+function wait(seconds: number) {
+   return new Promise((resolve) => {
+      setTimeout(resolve, seconds * 1000);
+   });
+}
 
 function TaskForm({ addNewTask }: TaskFormProps) {
    const [taskTitle, setTaskTitle] = useState("");
@@ -17,25 +24,31 @@ function TaskForm({ addNewTask }: TaskFormProps) {
       "Options"
    );
 
+   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
+   const closeModal = () => {
+      closeButtonRef.current && closeButtonRef.current.click();
+   };
+
    const [options, setOptions] = useState([
       {
          id: 1,
-         text: "",
+         title: "",
          isTrue: true
       },
       {
          id: 2,
-         text: "",
+         title: "",
          isTrue: false
       },
       {
          id: 3,
-         text: "",
+         title: "",
          isTrue: false
       },
       {
          id: 4,
-         text: "",
+         title: "",
          isTrue: false
       }
    ]);
@@ -43,13 +56,13 @@ function TaskForm({ addNewTask }: TaskFormProps) {
    const changeOptionText = (optionId: number) => (value: string) => {
       setOptions((opts) =>
          opts.map((opt) =>
-            opt.id === optionId ? { ...opt, text: value } : { ...opt }
+            opt.id === optionId ? { ...opt, title: value } : { ...opt }
          )
       );
    };
 
    const getOptionText = (optionId: number) =>
-      options.find((opt) => opt.id === optionId)?.text;
+      options.find((opt) => opt.id === optionId)?.title;
 
    const changeOptionIsTrue = (optionId: number) => {
       setOptions((opts) =>
@@ -63,7 +76,10 @@ function TaskForm({ addNewTask }: TaskFormProps) {
    const getOptionIsTrue = (optionId: number) =>
       options.find((opt) => opt.id === optionId)?.isTrue;
 
-   const submit = () => {
+   const [isSubmitting, setIsSubmitting] = useState(false);
+
+   const submit = async () => {
+      setIsSubmitting(true);
       let taskToSubmit: any;
       if (taskMode === "Open answer") {
          taskToSubmit = {
@@ -81,7 +97,11 @@ function TaskForm({ addNewTask }: TaskFormProps) {
             options: options.map(({ id, ...other }) => other)
          };
       }
+      await wait(0.5);
       addNewTask(taskToSubmit);
+      await wait(0.1);
+      toast.success("Task added");
+      closeModal();
    };
 
    return (
@@ -144,12 +164,12 @@ function TaskForm({ addNewTask }: TaskFormProps) {
                </div>
             )}
             <div className="flex justify-center gap-3 ">
-               <Dialog.Close>
+               <Dialog.Close ref={closeButtonRef}>
                   <Button variant="soft" color="gray">
                      Cancel
                   </Button>
                </Dialog.Close>
-               <Button onClick={submit}>Submit</Button>
+               <Button onClick={submit} loading={isSubmitting}>Submit</Button>
             </div>
          </form>
       </div>

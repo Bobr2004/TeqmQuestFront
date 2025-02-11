@@ -4,28 +4,12 @@ import Modal from "../../components/ui/Modal";
 import { useAppSelector } from "../../store/store";
 import QuestForm from "../../components/QuestForm";
 import { useEffect, useState } from "react";
+import { useGetAllQuestsQuery } from "../../store/quest/quest.api";
 
 const HomePage = () => {
    const { user } = useAppSelector((state) => state.auth);
 
-   const [quests, setQuests] = useState<QuestCardProps[]>([]);
-
-   useEffect(() => {
-      const token =
-         "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImlkIjoxOCwidXNlcm5hbWUiOiJha2FnYW1pMjIyMiIsInN1YiI6ImFrYWdhbWkyMjIyIiwiaWF0IjoxNzM5MjMxMDUwLCJleHAiOjE3NjM0MjMwNTB9.UkfrD8yLS56o1SZu8NwX0Sa1q8wnmdpvRftOE6R5L1q-Bau2tXpylNjrElQ0DtQ6VZELEBNc2bik3zwR-_HX6w";
-
-      (async () => {
-         const data: QuestCardProps[] = await fetch(
-            "http://13.60.43.26/api/quests",
-            {
-               headers: {
-                  Authorization: `Bearer ${token}`
-               }
-            }
-         ).then((res) => res.json());
-         setQuests(data);
-      })();
-   }, []);
+   const { data: quests, } = useGetAllQuestsQuery();
 
    return (
       <section className="container mx-auto p-4">

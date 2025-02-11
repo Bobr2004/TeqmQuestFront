@@ -8,6 +8,7 @@ export interface Quest {
   timeLimit: string;
   userId: number;
   image?: string;
+  rating: number;
 }
 
 export const questApi = createApi({
@@ -15,7 +16,7 @@ export const questApi = createApi({
   baseQuery: baseQuery('/api/quests'),
   endpoints: (builder) => ({
     getAllQuests: builder.query<Quest[], void>({
-      query: () => ({ url: '/' })
+      query: () => ({ url: "" })
     }),
     getQuestById: builder.query<Quest, number>({
       query: (questId) => ({ url: `/${questId}` })

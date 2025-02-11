@@ -26,10 +26,9 @@ export type QuestCardProps = {
   id: number;
   title: string;
   description: string;
-  imageSrc: string;
-  taskCount: number;
   timeLimit: string;
-  usersRated: number;
+  userId: number;
+  image?: string;
   rating: number;
 };
 

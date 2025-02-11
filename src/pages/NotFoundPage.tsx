@@ -1,5 +1,5 @@
 import { Button } from "@radix-ui/themes";
-import { routes } from "./routes";
+import { routes } from "../App";
 import { Link } from "react-router";
 
 function NotFoundPage() {

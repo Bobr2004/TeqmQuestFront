@@ -7,11 +7,23 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage/HomePage";
-import { routes } from "./pages/routes";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import EditQuestsPage from "./pages/EditQuestsPage/EditQuestsPage";
 import EditQuestPage from "./pages/EditQuestPage/EditQuestPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import QuestPage from "./pages/QuestPage/QuestPage";
+
+const routes = {
+   home: "/",
+   login: "/login",
+   signup: "/signup",
+   settings: "/settings",
+   editQuests: "/edit-quests",
+   toEditQuest: (id: string) => `/edit-quests/${id}`,
+   toQuest: (id: string) => `/quest/${id}`
+};
+
+export { routes };
 
 function Router() {
    return (
@@ -31,6 +43,7 @@ function Router() {
                />
 
                {/* Quests */}
+               <Route path={`quest/:id`} element={<QuestPage />} />
 
                <Route path="*" element={<NotFoundPage />} />
             </Route>

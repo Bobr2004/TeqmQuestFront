@@ -1,6 +1,6 @@
-import { Button, Card, ScrollArea } from "@radix-ui/themes";
+import { Button, ScrollArea } from "@radix-ui/themes";
 import { Link } from "react-router";
-import { routes } from "../routes";
+import { routes } from "../../App";
 import toast from "react-hot-toast";
 import { EditableQuest } from "./editQuestTypes";
 

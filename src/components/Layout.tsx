@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router";
-import { routes } from "../pages/routes";
+import { routes } from "../App";
 import { Button } from "@radix-ui/themes";
 import { useAppSelector } from "../store/store";
 

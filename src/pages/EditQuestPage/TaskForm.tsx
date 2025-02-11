@@ -1,10 +1,4 @@
-import {
-   Button,
-   Checkbox,
-   Dialog,
-   TextArea,
-   TextField
-} from "@radix-ui/themes";
+import { Button, Checkbox, Dialog, TextField } from "@radix-ui/themes";
 import { z } from "zod";
 import ErrorFormMessage from "../../components/ErrorFormMessage";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -40,7 +34,6 @@ function TaskForm() {
    const {
       register,
       handleSubmit,
-      getValues,
       formState: { errors, isSubmitting }
    } = useForm<taskData>({
       resolver: zodResolver(taskScheme)
@@ -92,7 +85,7 @@ function TaskForm() {
                   <label>
                      <div className="flex items-center gap-2">
                         <p className="font-bold">Option A:</p>
-                        <Checkbox/>
+                        <Checkbox />
                      </div>
                      <TextField.Root
                         {...register("optionA")}
@@ -102,7 +95,7 @@ function TaskForm() {
                   <label>
                      <div className="flex items-center gap-2">
                         <p className="font-bold">Option A:</p>
-                        <Checkbox/>
+                        <Checkbox />
                      </div>
                      <TextField.Root
                         {...register("optionA")}
@@ -112,7 +105,7 @@ function TaskForm() {
                   <label>
                      <div className="flex items-center gap-2">
                         <p className="font-bold">Option A:</p>
-                        <Checkbox/>
+                        <Checkbox />
                      </div>
                      <TextField.Root
                         {...register("optionA")}
@@ -122,7 +115,7 @@ function TaskForm() {
                   <label>
                      <div className="flex items-center gap-2">
                         <p className="font-bold">Option A:</p>
-                        <Checkbox/>
+                        <Checkbox />
                      </div>
                      <TextField.Root
                         {...register("optionA")}

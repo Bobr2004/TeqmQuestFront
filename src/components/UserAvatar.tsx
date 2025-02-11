@@ -7,7 +7,7 @@ import { Avatar, Button, Dialog } from "@radix-ui/themes";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import Popup from "./ui/Popup";
 import { NavLink } from "react-router";
-import { routes } from "../pages/routes";
+import { routes } from "../App";
 import Modal from "./ui/Modal";
 import { unsetUser } from "../store/auth/auth.slice";
 import LogoutModal from "../pages/SettingsPage/LogoutModal";

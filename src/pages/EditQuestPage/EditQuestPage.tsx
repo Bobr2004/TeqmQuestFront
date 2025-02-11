@@ -5,8 +5,12 @@ import NotFoundPage from "../NotFoundPage";
 import { Button } from "@radix-ui/themes";
 import Modal from "../../components/ui/Modal";
 import QuestForm from "../../components/QuestForm";
-import { routes } from "../routes";
 import TaskForm from "./TaskForm";
+
+
+
+
+
 
 function EditQuestPage() {
    const { id } = useParams();
@@ -55,7 +59,6 @@ function EditQuestPage() {
                content={
                   <QuestForm
                      update={update}
-                     redirect={routes.toEditQuest(String(id))}
                      id={Number(id)}
                      formTitle="Update quest info"
                      {...{ name, description }}

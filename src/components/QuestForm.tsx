@@ -7,7 +7,7 @@ import ErrorFormMessage from "./ErrorFormMessage";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { EditableQuest } from "../pages/EditQuestsPage/editQuestTypes";
-import { routes } from "../pages/routes";
+import { routes } from "../App";
 import { useRef } from "react";
 
 const questScheme = z.object({
@@ -31,7 +31,6 @@ type NewQuestFormProps = {
    description?: string;
    time?: number;
    id?: number;
-   redirect: string;
 };
 
 const QuestForm = ({
@@ -66,7 +65,7 @@ const QuestForm = ({
       if (localQuestsString) localQuests = JSON.parse(localQuestsString);
       if (!id) {
          const questToSave = {
-            id: localQuests.length + 1,
+            id: new Date().getTime(),
             name,
             description,
             time: time || null

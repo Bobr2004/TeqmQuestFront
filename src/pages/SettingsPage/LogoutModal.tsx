@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../store/store";
 import { useNavigate } from "react-router";
 import { useLazyLogoutQuery } from "../../store/auth/auth.api";
 import { unsetUser } from "../../store/auth/auth.slice";
-import { routes } from "../routes";
+import { routes } from "../../App";
 
 function LogoutModal() {
    const dispatch = useAppDispatch();

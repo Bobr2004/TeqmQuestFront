@@ -6,9 +6,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import ErrorFormMessage from "../components/ErrorFormMessage";
 import { useSignupMutation } from "../store/auth/auth.api";
 import { useAppDispatch } from "../store/store";
-import { setUser } from "../store/auth/auth.slice";
 import { useNavigate } from "react-router";
-import { routes } from "./routes";
+import { routes } from "../App";
 
 const signUpScheme = z
    .object({

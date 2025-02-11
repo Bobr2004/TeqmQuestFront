@@ -29,3 +29,31 @@ button:not([data-disabled="true"]) {
 .border-radix {
    border-color: var(--code-block-border) !important;
 }
+
+@keyframes editCardGlow {
+   0% {
+      outline-width: 0px;
+      outline-color: var(--accent-6);
+      background-color: var(--accent-2);
+   }
+   30% {
+      outline-width: 2px;
+      outline-color: var(--accent-11);
+      background-color: var(--accent-4);
+   }
+   60% {
+      outline-width: 2px;
+      outline-color: var(--accent-11);
+      background-color: var(--accent-4);
+   }
+   100% {
+      outline-width: 0px;
+      outline-color: var(--accent-6);
+      background-color: var(--accent-2);
+   }
+}
+
+.specialCard {
+   outline-style: solid;
+   animation: editCardGlow 1.5s ease-in-out forwards;
+}

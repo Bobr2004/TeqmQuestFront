@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { EditableQuest } from "./editQuestTypes";
 import EditQuestCard from "./EditQuestCard";
-import { Separator, Tooltip } from "@radix-ui/themes";
+import { Button, Separator, Tooltip } from "@radix-ui/themes";
+import { useLocation } from "react-router";
 
 function EditQuestsPage() {
+   const location = useLocation();
+   const specialQuestId = location.state?.questId;
+   console.log(location)
+
    const [localQuestsState, setLocalQuestsState] = useState<EditableQuest[]>(
       () => {
          const localQuestsString = localStorage.getItem("localQuests");
@@ -31,13 +36,14 @@ function EditQuestsPage() {
                   <p className="pi pi-info-circle"></p>
                </Tooltip>
             </div>
-
+            <Button className="!my-2">Add new</Button>
             {localQuestsState && localQuestsState.length ? (
                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full py-2">
                   {localQuestsState.map((localQuest) => (
                      <li key={localQuest.id}>
                         <EditQuestCard
                            {...localQuest}
+                           isSpecial={localQuest.id == specialQuestId}
                            onDelete={deleteLocalQuestHandler(localQuest.id)}
                         />
                      </li>

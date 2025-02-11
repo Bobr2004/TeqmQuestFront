@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { EditableQuest } from "../pages/EditQuestsPage/editQuestTypes";
 import { routes } from "../pages/routes";
+import { useRef } from "react";
 
 const questScheme = z.object({
    name: z.string().nonempty("Provide quest name"),
@@ -44,6 +45,8 @@ const QuestForm = ({
    //  const [createQuest, { isLoading }] = useCreateQuestMutation();
    const navigate = useNavigate();
 
+   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
    const {
       register,
       handleSubmit,
@@ -63,7 +66,7 @@ const QuestForm = ({
       if (localQuestsString) localQuests = JSON.parse(localQuestsString);
       if (!id) {
          const questToSave = {
-            id: localQuests.length,
+            id: localQuests.length + 1,
             name,
             description,
             time: time || null
@@ -75,7 +78,7 @@ const QuestForm = ({
          );
          await wait(0.5);
 
-         navigate(routes.editQuests);
+         navigate(routes.editQuests, { state: { questId: questToSave.id } });
 
          toast.success("Quest is created");
       } else {
@@ -95,21 +98,11 @@ const QuestForm = ({
          );
          await wait(0.5);
          if (update) update(questToSave);
-         
+
+         closeButtonRef.current && closeButtonRef.current.click();
+
          toast.success("Quest is updated");
       }
-
-      // if (!isSubmitting && !isLoading) {
-      //    const fd = new FormData();
-      //    fd.append("name", data.name);
-      //    fd.append("description", data.description);
-      //    if (data.time) fd.append("time", data.time.toString());
-
-      //    createQuest(fd)
-      //       .unwrap()
-      //       .then((quest) => navigate(`/edit-quest/${quest.id}`))
-      //       .catch(console.log);
-      // }
    };
 
    return (
@@ -161,7 +154,7 @@ const QuestForm = ({
             )}
             <div className="flex justify-center gap-3 ">
                <Dialog.Close>
-                  <Button variant="soft" color="gray">
+                  <Button variant="soft" color="gray" ref={closeButtonRef}>
                      Cancel
                   </Button>
                </Dialog.Close>

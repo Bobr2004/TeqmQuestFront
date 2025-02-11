@@ -15,9 +15,9 @@ const HomePage = () => {
             {user ? (
                <Modal
                   trigger={
-                     <div>
+                     <article>
                         <NewQuestCard />
-                     </div>
+                     </article>
                   }
                   content={<QuestForm redirect={routes.editQuests} />}
                />

@@ -5,7 +5,7 @@ import { baseQuery } from '../baseQuery';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery,
+  baseQuery: baseQuery('/'),
   endpoints: (builder) => ({
     signup: builder.mutation<string, FormData>({
       query: (body) => ({ url: 'registration', body, method: 'POST' }),

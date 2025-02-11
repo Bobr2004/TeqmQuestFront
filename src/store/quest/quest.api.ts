@@ -1,37 +1,37 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from '../baseQuery';
 
-interface Quest {
+export interface Quest {
   id: number;
-  // other stuff from backend
+  title: string;
+  description: string;
+  timeLimit: string;
+  userId: number;
+  image?: string;
 }
 
 export const questApi = createApi({
   reducerPath: 'questApi',
-  baseQuery,
+  baseQuery: baseQuery('/api/quests'),
   endpoints: (builder) => ({
+    getAllQuests: builder.query<Quest[], void>({
+      query: () => ({ url: '/' })
+    }),
+    getQuestById: builder.query<Quest, number>({
+      query: (questId) => ({ url: `/${questId}` })
+    }),
+    deleteQuestById: builder.mutation<void, number>({
+      query: (questId) => ({ url: `/${questId}`, method: 'DELETE' })
+    }),
     createQuest: builder.mutation<Quest, FormData>({
-      query: (body) => ({ url: 'new-quest', body, method: 'POST' })
-    }),
-    addTask: builder.mutation<unknown, { questId: number; body: FormData }>({
-      query: ({ questId, body }) => ({
-        url: `${questId}/add-task`,
-        body,
-        method: 'PATCH'
-      })
-    }),
-    removeTask: builder.mutation<unknown, { questId: number; taskId: number }>({
-      query: ({ questId, taskId }) => ({
-        url: `${questId}/remove-task`,
-        body: { taskId },
-        method: 'DELETE'
-      })
+      query: (body) => ({ url: '/', body, method: 'POST' })
     })
   })
 });
 
 export const {
-  useCreateQuestMutation,
-  useAddTaskMutation,
-  useRemoveTaskMutation
+  useDeleteQuestByIdMutation,
+  useGetAllQuestsQuery,
+  useGetQuestByIdQuery,
+  useCreateQuestMutation
 } = questApi;

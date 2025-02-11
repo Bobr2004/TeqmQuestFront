@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { authApi, authSlice } from './auth';
-import { questApi } from './quest';
+import { questApi, questSlice } from './quest';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistCombineReducers } from 'redux-persist';
 
@@ -13,6 +13,7 @@ const persistConfig = {
 
 const persistedReducer = persistCombineReducers(persistConfig, {
   auth: authSlice,
+  quest: questSlice,
   [authApi.reducerPath]: authApi.reducer,
   [questApi.reducerPath]: questApi.reducer
 });

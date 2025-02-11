@@ -5,6 +5,7 @@ import Segments from '../../components/ui/Segments';
 import LogoutModal from './LogoutModal';
 import ChangeImageForm from './ChangeImageForm';
 import { setTheme } from '../../store/auth/auth.slice';
+import ClearCacheModal from './ClearCacheModal';
 
 function SettingsPage() {
   const { user, theme } = useAppSelector((state) => state.auth);
@@ -59,9 +60,14 @@ function SettingsPage() {
           />
         </div>
         <div className="mt-2 flex justify-end">
-          <Button color="red" variant="outline">
-            Clear cache
-          </Button>
+          <Modal
+            trigger={
+              <Button color="red" variant="outline">
+                Clear cache
+              </Button>
+            }
+            content={<ClearCacheModal />}
+          />
         </div>
       </section>
     </>

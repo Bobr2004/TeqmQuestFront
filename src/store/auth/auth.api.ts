@@ -9,7 +9,7 @@ export const authApi = createApi({
       prepareHeaders: (headers) => {
         // TODO: Remove token and receive it
          const token =
-            "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImlkIjoxOCwidXNlcm5hbWUiOiJha2FnYW1pMjIyMiIsInN1YiI6ImFrYWdhbWkyMjIyIiwiaWF0IjoxNzM5MjMxMDUwLCJleHAiOjE3NjM0MjMwNTB9.UkfrD8yLS56o1SZu8NwX0Sa1q8wnmdpvRftOE6R5L1q-Bau2tXpylNjrElQ0DtQ6VZELEBNc2bik3zwR-_HX6w";
+            "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sImlkIjoxNiwidXNlcm5hbWUiOiJCb2hkYW5TaDIyb3ZrMjIyMjExMSIsInN1YiI6IkJvaGRhblNoMjJvdmsyMjIyMTExIiwiaWF0IjoxNzM5Mjc4ODg0LCJleHAiOjE3NjM0NzA4ODR9.zKyFCk41SAgFWs74H04IFZdEagQBQhkYpTxIfYOUvMNJZCGERVtISBfN4-WXLiGaP7_EZFVxK__zSwz7G53dCQ";
          if (token) {
             headers.set("Authorization", `Bearer ${token}`);
          }

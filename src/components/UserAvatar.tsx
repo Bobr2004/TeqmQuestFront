@@ -1,55 +1,13 @@
-// import { ChangeEvent, useRef } from "react";
-import {
-   //  useChangeAvatarMutation,
-   useLazyLogoutQuery
-} from "../store/auth/auth.api";
-import { Avatar, Button, Dialog } from "@radix-ui/themes";
-import { useAppDispatch, useAppSelector } from "../store/store";
+import { Avatar, Button } from "@radix-ui/themes";
+import { useAppSelector } from "../store/store";
 import Popup from "./ui/Popup";
 import { NavLink } from "react-router";
 import { routes } from "../App";
 import Modal from "./ui/Modal";
-import { unsetUser } from "../store/auth/auth.slice";
 import LogoutModal from "../pages/SettingsPage/LogoutModal";
 
 const UserAvatar = () => {
    const { user } = useAppSelector((state) => state.auth);
-
-   //  const [changeAvatar, { isLoading: isAvatarChanging }] =
-   //     useChangeAvatarMutation();
-   //  const fileInputRef = useRef<HTMLInputElement>(null);
-
-   //  const handleChangeAvatar = () => {
-   //     if (fileInputRef.current && !isAvatarChanging) {
-   //        fileInputRef.current.click();
-   //     }
-   //  };
-
-   //  const handleSaveAvatar = (e: ChangeEvent<HTMLInputElement>) => {
-   //     if (e.target.files && e.target.files.length) {
-   //        const fd = new FormData();
-   //        fd.append("image", e.target.files[0]);
-
-   //        changeAvatar(fd)
-   //           .unwrap()
-   //           .then(() => {})
-   //           .catch(console.log);
-   //     }
-   //  };
-
-   const dispatch = useAppDispatch();
-   const [logout, { isLoading }] = useLazyLogoutQuery();
-
-   const handleLogout = () => {
-      if (!isLoading) {
-         dispatch(unsetUser()); // REMOVE LATER
-         logout()
-            .unwrap()
-            .then(() => dispatch(unsetUser()))
-            .catch(console.log);
-      }
-   };
-
    if (user)
       return (
          <Popup

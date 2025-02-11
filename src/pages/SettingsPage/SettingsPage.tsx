@@ -20,7 +20,7 @@ function SettingsPage() {
                   <Avatar fallback="A" src={user?.image} size="8" />
                   <Modal
                      trigger={
-                        <Button variant="soft" color="gray">
+                        <Button variant="soft" >
                            Change Picture
                         </Button>
                      }

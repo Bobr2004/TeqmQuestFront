@@ -46,6 +46,10 @@ const QuestForm = ({
 
    const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
+   const closeModal = () => {
+      closeButtonRef.current && closeButtonRef.current.click();
+   };
+
    const {
       register,
       handleSubmit,
@@ -76,9 +80,7 @@ const QuestForm = ({
             JSON.stringify([...localQuests, questToSave])
          );
          await wait(0.5);
-
          navigate(routes.editQuests, { state: { questId: questToSave.id } });
-
          toast.success("Quest is created");
       } else {
          const questToSave = {
@@ -97,9 +99,7 @@ const QuestForm = ({
          );
          await wait(0.5);
          if (update) update(questToSave);
-
-         closeButtonRef.current && closeButtonRef.current.click();
-
+         closeModal();
          toast.success("Quest is updated");
       }
    };

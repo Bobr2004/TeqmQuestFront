@@ -37,7 +37,6 @@ function QuestCard({
    id,
    title,
    description,
-   imageSrc,
    timeLimit,
    rating
 }: QuestCardProps) {

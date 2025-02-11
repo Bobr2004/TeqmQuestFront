@@ -1,10 +1,17 @@
 import { Button, Dialog } from "@radix-ui/themes";
 import ImageInput from "../../components/ImageInput";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function ChangeImageForm() {
    const [image, setImage] = useState<File | null>(null);
 
+   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
+   const closeModal = () => {
+      closeButtonRef.current && closeButtonRef.current.click();
+   };
+
+   // Uploading image logic
 
    return (
       <form className="flex flex-col gap-4">
@@ -14,7 +21,7 @@ function ChangeImageForm() {
          <ImageInput setImageState={setImage} />
          <div className="flex gap-2 justify-center">
             <Dialog.Close>
-               <Button color="gray" variant="soft">
+               <Button color="gray" variant="soft" ref={closeButtonRef}>
                   Cancel
                </Button>
             </Dialog.Close>

@@ -2,16 +2,32 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import { authApi, authSlice } from './auth';
 import { questApi } from './quest';
+import storage from 'redux-persist/lib/storage';
+import { persistStore, persistCombineReducers } from 'redux-persist';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  blacklist: ['authApi', 'questApi']
+};
+
+const persistedReducer = persistCombineReducers(persistConfig, {
+  auth: authSlice,
+  [authApi.reducerPath]: authApi.reducer,
+  [questApi.reducerPath]: questApi.reducer
+});
 
 export const store = configureStore({
-  reducer: {
-    auth: authSlice,
-    [authApi.reducerPath]: authApi.reducer,
-    [questApi.reducerPath]: questApi.reducer
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware, questApi.middleware)
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE']
+      }
+    }).concat(authApi.middleware, questApi.middleware)
 });
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

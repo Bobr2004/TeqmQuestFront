@@ -1,4 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { baseQuery } from '../baseQuery';
 
 interface Quest {
   id: number;
@@ -7,7 +8,7 @@ interface Quest {
 
 export const questApi = createApi({
   reducerPath: 'questApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://13.60.43.26/' }),
+  baseQuery,
   endpoints: (builder) => ({
     createQuest: builder.mutation<Quest, FormData>({
       query: (body) => ({ url: 'new-quest', body, method: 'POST' })

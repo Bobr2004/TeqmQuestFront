@@ -1,6 +1,6 @@
-import { Card, ScrollArea } from "@radix-ui/themes";
-import { Link } from "react-router";
-import { routes } from "../../App";
+import { Card, ScrollArea } from '@radix-ui/themes';
+import { Link } from 'react-router';
+import { routes } from '../../configs/routes';
 
 // {
 //    "id": 1,
@@ -23,53 +23,53 @@ import { routes } from "../../App";
 // },
 
 export type QuestCardProps = {
-   id: number;
-   title: string;
-   description: string;
-   imageSrc: string;
-   taskCount: number;
-   timeLimit: string;
-   usersRated: number;
-   rating: number;
+  id: number;
+  title: string;
+  description: string;
+  imageSrc: string;
+  taskCount: number;
+  timeLimit: string;
+  usersRated: number;
+  rating: number;
 };
 
 function QuestCard({
-   id,
-   title,
-   description,
-   timeLimit,
-   rating
+  id,
+  title,
+  description,
+  timeLimit,
+  rating
 }: QuestCardProps) {
-   return (
-      <article>
-         <Card asChild>
-            <Link to={routes.toQuest(String(id))} className="w-full">
-               <div className="flex justify-between gap-2">
-                  <h3 className="font-bold text-xl">{title}</h3>
-                  <p>{timeLimit}</p>
-               </div>
+  return (
+    <article>
+      <Card asChild>
+        <Link to={routes.toQuest(String(id))} className="w-full">
+          <div className="flex justify-between gap-2">
+            <h3 className="font-bold text-xl">{title}</h3>
+            <p>{timeLimit}</p>
+          </div>
 
-               <ScrollArea className="!h-[50px]">
-                  <p className="text-[var(--gray-11)]">{description}</p>
-               </ScrollArea>
-               <QuestRating rating={rating} />
-            </Link>
-         </Card>
-      </article>
-   );
+          <ScrollArea className="!h-[50px]">
+            <p className="text-[var(--gray-11)]">{description}</p>
+          </ScrollArea>
+          <QuestRating rating={rating} />
+        </Link>
+      </Card>
+    </article>
+  );
 }
 
 function QuestRating({ rating }: { rating: number }) {
-   return (
-      <div className="flex gap-1 justify-end items-center">
-         <p>{rating}</p>
-         <p className="pi pi-star-fill"></p>
+  return (
+    <div className="flex gap-1 justify-end items-center">
+      <p>{rating}</p>
+      <p className="pi pi-star-fill"></p>
 
-         {/* {Array.from({ length: rating }, (_, index) => (
+      {/* {Array.from({ length: rating }, (_, index) => (
             <p key={index} className="pi pi-star-fill"></p>
          ))} */}
-      </div>
-   );
+    </div>
+  );
 }
 
 // type submitQuest =

@@ -21,6 +21,7 @@
       "react-hot-toast": "^2.5.1",
       "react-redux": "^9.2.0",
       "react-router": "^7.1.5",
+      "redux-persist": "^6.0.0",
       "tailwindcss": "^4.0.3",
       "uuid": "^11.0.5",
       "zod": "^3.24.1"
@@ -29,6 +30,7 @@
       "@eslint/js": "^9.19.0",
       "@types/react": "^19.0.8",
       "@types/react-dom": "^19.0.3",
+      "@types/redux-persist": "^4.0.0",
       "@vitejs/plugin-react": "^4.3.4",
       "eslint": "^9.19.0",
       "eslint-plugin-react-hooks": "^5.0.0",

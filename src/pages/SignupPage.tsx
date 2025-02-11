@@ -8,6 +8,7 @@ import { useSignupMutation } from "../store/auth/auth.api";
 import { useAppDispatch } from "../store/store";
 import { setUser } from "../store/auth/auth.slice";
 import { useNavigate } from "react-router";
+import { routes } from "./routes";
 
 const signUpScheme = z
    .object({
@@ -58,9 +59,10 @@ const SignUpPage = () => {
 
          signup(fd)
             .unwrap()
-            .then((user) => {
-               dispatch(setUser(user));
-               navigate("/", { replace: true });
+            .then((token) => {
+               // TODO: Refetch current user
+               localStorage.setItem("token", token);
+               navigate(routes.home, { replace: true });
             })
             .catch(console.log);
       }
@@ -110,7 +112,9 @@ const SignUpPage = () => {
                />
             </label>
             {errors.repeatPassword && (
-               <ErrorFormMessage>{errors.repeatPassword.message}</ErrorFormMessage>
+               <ErrorFormMessage>
+                  {errors.repeatPassword.message}
+               </ErrorFormMessage>
             )}
             <Button>Submit</Button>
          </form>

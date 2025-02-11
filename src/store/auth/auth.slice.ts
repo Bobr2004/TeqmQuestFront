@@ -18,7 +18,7 @@ const mockUser: User = {
   username: 'AntonUA'
 };
 
-const initialState: AuthState = { user: mockUser };
+const initialState: AuthState = { user: null };
 
 const authSlice = createSlice({
   name: 'auth',

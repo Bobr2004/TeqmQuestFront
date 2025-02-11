@@ -2,7 +2,6 @@ import { Card } from "@radix-ui/themes";
 import { Link } from "react-router";
 import { routes } from "../routes";
 
-
 // {
 //    "id": 1,
 //    "title": "Python Basics",
@@ -23,8 +22,6 @@ import { routes } from "../routes";
 //    "rating": 4.5
 // },
 
-
-
 function QuestCard() {
    return (
       <article>
@@ -43,5 +40,15 @@ function QuestCard() {
       </article>
    );
 }
+
+// type submitQuest =
+//    {
+//         questId: string;
+//         task: {
+//            taskId: string;
+//            openAnswer: string || optionId: string;
+
+//         }[];
+//      }
 
 export default QuestCard;

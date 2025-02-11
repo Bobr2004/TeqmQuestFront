@@ -4,9 +4,20 @@ import { Button } from "@radix-ui/themes";
 import { useAppSelector } from "../store/store";
 
 import UserAvatar from "./UserAvatar";
+import { useCurrentUserQuery } from "../store/auth/auth.api";
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/auth/auth.slice";
+import { useEffect } from "react";
 
 function Layout() {
    const { user } = useAppSelector((state) => state.auth);
+   const dispatch = useDispatch();
+
+   const { data: userResponse, isLoading } = useCurrentUserQuery();
+   useEffect(() => {
+      userResponse && dispatch(setUser(userResponse));
+   }, [userResponse]);
+
    return (
       <>
          <header className="bg-[var(--accent-1)] border-b border-[var(--gray-6)]">
@@ -24,12 +35,13 @@ function Layout() {
                   )}
                </ul>
                <ul className="flex gap-2">
-                  {user ? (
+                  {/* {isLoading && <Button loading variant="soft"/>} */}
+                  {user && (
                      <>
-                        {/* <Button onClick={handleLogout}>Logout</Button> */}
                         <UserAvatar />
                      </>
-                  ) : (
+                  )}
+                  {!isLoading && !user && (
                      <>
                         <NavLink to={routes.login}>
                            <Button variant="soft">Login</Button>

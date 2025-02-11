@@ -10,11 +10,10 @@ import { NavLink } from "react-router";
 import { routes } from "../pages/routes";
 import Modal from "./ui/Modal";
 import { unsetUser } from "../store/auth/auth.slice";
+import LogoutModal from "../pages/SettingsPage/LogoutModal";
 
 const UserAvatar = () => {
    const { user } = useAppSelector((state) => state.auth);
-   const dispatch = useAppDispatch();
-   const [logout, { isLoading }] = useLazyLogoutQuery();
 
    //  const [changeAvatar, { isLoading: isAvatarChanging }] =
    //     useChangeAvatarMutation();
@@ -37,6 +36,9 @@ const UserAvatar = () => {
    //           .catch(console.log);
    //     }
    //  };
+
+   const dispatch = useAppDispatch();
+   const [logout, { isLoading }] = useLazyLogoutQuery();
 
    const handleLogout = () => {
       if (!isLoading) {
@@ -66,32 +68,18 @@ const UserAvatar = () => {
             content={
                <div className="flex flex-col gap-3">
                   <p>Username: {user.username}</p>
-                  <Button asChild variant="soft">
-                     <NavLink to={routes.home}>Settings</NavLink>
+                  <Button asChild variant="outline">
+                     <NavLink to={routes.settings}>
+                        Settings <p className="pi pi-cog"></p>
+                     </NavLink>
                   </Button>
                   <Modal
                      trigger={
-                        <Button color="red" variant="soft">
-                           Logout
+                        <Button variant="outline" color="red">
+                           Logout <p className="pi pi-sign-out"></p>
                         </Button>
                      }
-                     content={
-                        <>
-                           <Dialog.Title className="text-center">
-                              Are you sure you want to log out?
-                           </Dialog.Title>
-                           <div className="flex gap-2 justify-center">
-                              <Dialog.Close>
-                                 <Button variant="soft" color="gray">
-                                    Cancel
-                                 </Button>
-                              </Dialog.Close>
-                              <Button color="red" onClick={handleLogout}>
-                                 Logout
-                              </Button>
-                           </div>
-                        </>
-                     }
+                     content={<LogoutModal />}
                   />
                </div>
             }

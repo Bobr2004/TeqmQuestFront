@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { EditableQuest } from "./editQuestTypes";
 import EditQuestCard from "./EditQuestCard";
-import { Separator } from "@radix-ui/themes";
+import { Separator, Tooltip } from "@radix-ui/themes";
 
 function EditQuestsPage() {
    const [localQuestsState, setLocalQuestsState] = useState<EditableQuest[]>(
@@ -25,7 +25,12 @@ function EditQuestsPage() {
    return (
       <>
          <section className="container mx-auto p-4">
-            <h2 className="font-bold text-xl">Unpublished quests:</h2>
+            <div className="flex gap-2 items-center">
+               <h2 className="font-bold text-xl">Unpublished quests:</h2>
+               <Tooltip content="Storred in browser cache">
+                  <p className="pi pi-info-circle"></p>
+               </Tooltip>
+            </div>
 
             {localQuestsState && localQuestsState.length ? (
                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full py-2">

@@ -8,7 +8,7 @@ import { store } from "./store/store";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage/HomePage";
 import { routes } from "./pages/routes";
-import SettingsPage from "./pages/SettingsPage";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import EditQuestsPage from "./pages/EditQuestsPage/EditQuestsPage";
 import EditQuestPage from "./pages/EditQuestPage/EditQuestPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -32,7 +32,7 @@ function Router() {
 
                {/* Quests */}
 
-               <Route path="*" element={<NotFoundPage/>} />
+               <Route path="*" element={<NotFoundPage />} />
             </Route>
          </Routes>
       </BrowserRouter>
@@ -42,12 +42,12 @@ function Router() {
 function App() {
    return (
       <>
-         <Theme appearance="dark" accentColor="green">
-            <Provider store={store}>
+         <Provider store={store}>
+            <Theme appearance="dark" accentColor="green">
                <Router />
                <ToasterProvider />
-            </Provider>
-         </Theme>
+            </Theme>
+         </Provider>
       </>
    );
 }

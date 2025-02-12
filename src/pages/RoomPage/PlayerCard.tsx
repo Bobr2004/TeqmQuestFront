@@ -1,17 +1,19 @@
-import { Avatar, Card, ScrollArea, Tooltip } from "@radix-ui/themes";
+import { Avatar, Tooltip } from "@radix-ui/themes";
 
 type PlayerCardProps = {
-   name: string;
-   imageSrc?: string;
+   username: string;
+   image?: string;
+   id: number;
 };
 
-function PlayerCard({ name, imageSrc }: PlayerCardProps) {
+function PlayerCard({ username, image }: PlayerCardProps) {
    return (
       <>
          {/* <Card className="!space-y-1"> */}
-         <Tooltip content={name}>
+         <Tooltip content={username}>
             <div>
                <Avatar
+                  src={image}
                   fallback={<p className="pi pi-user text-3xl"></p>}
                   size="6"
                />
@@ -37,6 +39,6 @@ function EmptyPlayer() {
    );
 }
 
-export {EmptyPlayer}
+export { EmptyPlayer };
 
 export default PlayerCard;

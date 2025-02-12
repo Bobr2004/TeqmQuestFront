@@ -1,6 +1,6 @@
 // import { useParams } from "react-router";
 // import { useGetQuestByIdQuery } from "../../store/quest/quest.api";
-import { Button, Separator, Skeleton, Spinner } from "@radix-ui/themes";
+import { Button, Separator, Spinner } from "@radix-ui/themes";
 import Modal from "../../components/ui/Modal";
 // import QuestRating from "./QuestRating";
 import CreateRoomForm from "./CreateRoomForm";
@@ -19,7 +19,7 @@ function QuestPage() {
       Number(id)
    );
 
-   const { data: roomsList, isLoading: isRoomsLoading } =
+   const { data: roomsList } =
       useGetRoomsByQuestIDQuery(Number(id));
 
    if (isQuestLoading)

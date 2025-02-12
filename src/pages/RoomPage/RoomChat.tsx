@@ -17,33 +17,26 @@ function RoomChat({ sendMessage, messages }: RoomChatProps) {
                <ul className="space-y-2">
                   {messages &&
                      messages.map((message, i) => (
-                        <>
-                           {message.message && (
-                              <li key={i}>
-                                 <ChatMessage {...message} />
-                              </li>
-                           )}
-                        </>
+                        <li key={i}>
+                           <ChatMessage {...message} />
+                        </li>
                      ))}
                </ul>
             </ScrollArea>
          </div>
          <div className="mb-2 grid grid-cols-5 gap-2">
-            <Button color="gray" variant="soft">
-               👍
-            </Button>
-            <Button color="gray" variant="soft">
-               🎉
-            </Button>
-            <Button color="gray" variant="soft">
-               😎
-            </Button>
-            <Button color="gray" variant="soft">
-               💀
-            </Button>
-            <Button color="gray" variant="soft">
-               🥶
-            </Button>
+            {["👍", "🎉", "😎", "💀", "🥶"].map((smile, i) => (
+               <Button
+                  color="gray"
+                  variant="soft"
+                  onClick={() => {
+                     sendMessage(smile);
+                  }}
+                  key={i}
+               >
+                  {smile}
+               </Button>
+            ))}
          </div>
          <div className="flex gap-2 pb-4">
             <TextField.Root
@@ -66,11 +59,22 @@ function RoomChat({ sendMessage, messages }: RoomChatProps) {
 }
 
 function ChatMessage({ message, username }: Message) {
-   const usernameSymbol = username ? username[0] : "A";
+   const usernameSymbol = username ? (
+      username[0]
+   ) : (
+      <p className="pi pi-user"></p>
+   );
+
+   function getColor(n: number): "green" | "violet" | "blue" | "red" {
+      if (n % 3 === 0) return "green";
+      if (n % 5 === 0) return "violet";
+      if (n % 2 === 0) return "blue";
+      return "red";
+   }
 
    return (
       <div className="flex gap-0.5">
-         <Avatar fallback={usernameSymbol} size="1" />
+         <Avatar fallback={usernameSymbol} size="1" color={getColor(username.length)} />
          <p className="mr-0.5">:</p>
          <p className="text-[var(--gray-10)]">{message}</p>
       </div>

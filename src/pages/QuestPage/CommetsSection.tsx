@@ -4,7 +4,7 @@ import {
    useAddCommentMutation,
    useGetQuestCommentsQuery
 } from "../../store/comment/comment.api";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { routes } from "../../configs/routes";
 import Comment from "./Comment";

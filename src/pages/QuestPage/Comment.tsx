@@ -1,9 +1,6 @@
 import {
    Avatar,
    Button,
-   Card,
-   Dialog,
-   TextArea,
    Tooltip
 } from "@radix-ui/themes";
 import {
@@ -11,7 +8,6 @@ import {
    useDeleteCommentByIdMutation
 } from "../../store/comment/comment.api";
 import { useAppSelector } from "../../store/store";
-import Modal from "../../components/ui/Modal";
 
 interface Props {
    comment: IComment;

@@ -23,14 +23,14 @@ function Segments({ items, stringItems, ...props }: SegmentsProps) {
    return (
       <SegmentedControl.Root {...props}>
          {stringItems &&
-            stringItems.map((item) => (
-               <SegmentedControl.Item value={item}>
+            stringItems.map((item, i) => (
+               <SegmentedControl.Item value={item} key={i}>
                   {item}
                </SegmentedControl.Item>
             ))}
          {items &&
-            items.map(({ value, title }) => (
-               <SegmentedControl.Item value={value}>
+            items.map(({ value, title }, i) => (
+               <SegmentedControl.Item value={value} key={i}>
                   {title || value}
                </SegmentedControl.Item>
             ))}

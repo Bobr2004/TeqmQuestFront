@@ -26,10 +26,10 @@ function RoomTasks({ id }: { id: number }) {
 
    const [tasks, setTasks] = useState<TaskType[]>([]);
 
-   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
+   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
    const selectedTask =
-      tasks.find((task) => task.id === selectedTaskId) || tasks[0];
+      tasks.find((task) => task.id === Number(selectedTaskId)) || tasks[0];
 
    useEffect(() => {
       (async () => {
@@ -38,7 +38,7 @@ function RoomTasks({ id }: { id: number }) {
                token
             ).get(`/api/tasks/${id}`);
             setTasks(tasks);
-            setSelectedTaskId(tasks[0].id);
+            setSelectedTaskId(String(tasks[0].id));
             console.log(tasks);
          } catch (error) {
             toast.error(JSON.stringify(error));
@@ -47,27 +47,29 @@ function RoomTasks({ id }: { id: number }) {
    }, []);
    return (
       <div>
-         <div>
-            <RoomTask {...selectedTask} />
-         </div>
-         <ul>
+         <div className="flex justify-start p-2">
             <Segments
+               value={selectedTaskId}
+               onValueChange={setSelectedTaskId}
                items={tasks.map((task, i) => ({
                   value: String(task.id),
                   title: String(i + 1)
                }))}
             />
-         </ul>
+         </div>
+         <div>
+            <RoomTask {...selectedTask} />
+         </div>
       </div>
    );
 }
 
-function RoomTask({ id, image, title, options, openAnswer }: TaskType) {
+function RoomTask({ image, title, options, openAnswer }: TaskType) {
    const answerType = () => {
       if (openAnswer) {
          return (
             <>
-               <TextField.Root />
+               <TextField.Root placeholder="Your answer"/>
             </>
          );
       }
@@ -83,10 +85,10 @@ function RoomTask({ id, image, title, options, openAnswer }: TaskType) {
    };
 
    return (
-      <div>
-         <h3>{title}</h3>
+      <div className="space-y-3">
+         <h3 className="text-2xl font-bold text-center">{title}</h3>
          {image && (
-            <div>
+            <div className="h-[240px] border p-2 border-[var(--gray-4)] rounded-[var(--radius-4)]">
                <ImageWithLoader src={image} />
             </div>
          )}

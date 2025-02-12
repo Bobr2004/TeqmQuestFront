@@ -13,8 +13,8 @@ function QuestPage() {
 
    return (
       <>
-         <main className="container mx-auto p-4">
-            <div className="grid md:grid-cols-[1fr_2fr] gap-4">
+         <div className="container mx-auto p-4 h-full">
+            <div className="grid md:grid-cols-[1fr_2fr] gap-4 h-4/5">
                <section className="space-y-3">
                   <h1 className="text-2xl font-bold text-center">
                      One piece Quest
@@ -34,7 +34,7 @@ function QuestPage() {
                   <p>Time limit: 00:20:00</p>
                   {/* <QuestRating rating={3.8} /> */}
                </section>
-               <section className="min-h-[50vh]">
+               <section>
                   <h2 className="font-bold text-lg">Browse Public Rooms:</h2>
                   <ul className="grid sm:grid-cols-3 lg:grid-cols-4 gap-2 mt-2">
                      <li>
@@ -63,12 +63,12 @@ function QuestPage() {
                <section>
                   <h2 className="font-bold text-lg">Rating:</h2>
                </section>
-               <section className="space-y-2">
+               <section className="space-y-2  mb-4">
                   <h2 className="font-bold text-lg">Comments:</h2>
                   <TextArea />
                </section>
             </div>
-         </main>
+         </div>
       </>
    );
 }

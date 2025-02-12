@@ -2,6 +2,20 @@
 
 @import "primeicons/primeicons.css";
 
+html, body, #root, #root > div {
+   height: 100%;
+}
+
+#root > div {
+   display: flex;
+   flex-direction: column;
+}
+
+main {
+   flex-grow: 1;
+}
+
+
 button:not([data-disabled="true"]) {
    cursor: pointer !important;
 }

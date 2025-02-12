@@ -2,12 +2,19 @@ import axios from "axios";
 
 export const routes = {
    home: "/",
+
    login: "/login",
    signup: "/signup",
    settings: "/settings",
+
    editQuests: "/edit-quests",
    toEditQuest: (id: string) => `/edit-quests/${id}`,
-   toQuest: (id: string) => `/quest/${id}`
+
+   quest: "quest/:id",
+   toQuest: (id: string) => `/quest/${id}`,
+
+   room: "room/:id",
+   toRoom: (id: string) => `/room/${id}`
 };
 
 export const backendAPI = (token: string | null) =>

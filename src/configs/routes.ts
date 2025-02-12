@@ -1,26 +1,27 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const routes = {
-   home: "/",
+  home: '/',
 
-   login: "/login",
-   signup: "/signup",
-   settings: "/settings",
+  login: '/login',
+  signup: '/signup',
+  settings: '/settings',
+  auth: '/auth',
 
-   editQuests: "/edit-quests",
-   toEditQuest: (id: string) => `/edit-quests/${id}`,
+  editQuests: '/edit-quests',
+  toEditQuest: (id: string) => `/edit-quests/${id}`,
 
-   quest: "quest/:id",
-   toQuest: (id: string) => `/quest/${id}`,
+  quest: 'quest/:id',
+  toQuest: (id: string) => `/quest/${id}`,
 
-   room: "room/:id",
-   toRoom: (id: string) => `/room/${id}`
+  room: 'room/:id',
+  toRoom: (id: string) => `/room/${id}`
 };
 
 export const backendAPI = (token: string | null) =>
-   axios.create({
-      baseURL: "http://ec2-13-60-43-26.eu-north-1.compute.amazonaws.com",
-      headers: {
-         Authorization: `Bearer ${token}`
-      }
-   });
+  axios.create({
+    baseURL: 'http://ec2-13-60-43-26.eu-north-1.compute.amazonaws.com',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });

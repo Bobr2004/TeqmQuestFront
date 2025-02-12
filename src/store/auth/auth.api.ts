@@ -28,6 +28,12 @@ export const authApi = createApi({
     }),
     changeAvatar: builder.mutation<unknown, FormData>({
       query: (body) => ({ url: 'user/updateImage', body, method: 'PATCH' })
+    }),
+    oauthGoogle: builder.query<void, void>({
+      query: () => ({ url: 'oauth2/authorization/google' })
+    }),
+    oauthGithub: builder.query<void, void>({
+      query: () => ({ url: 'oauth2/authorization/github' })
     })
   })
 });
@@ -37,5 +43,7 @@ export const {
   useSignupMutation,
   useLoginMutation,
   useDeleteAccountMutation,
-  useChangeAvatarMutation
+  useChangeAvatarMutation,
+  useLazyOauthGoogleQuery,
+  useLazyOauthGithubQuery
 } = authApi;

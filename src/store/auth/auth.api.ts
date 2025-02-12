@@ -23,7 +23,9 @@ export const authApi = createApi({
     getCurrentUser: builder.query<User, void>({
       query: () => ({ url: 'currentAccount' })
     }),
-    logout: builder.query<string, void>({ query: () => ({ url: 'logout' }) }),
+    deleteAccount: builder.mutation<void, void>({
+      query: () => ({ url: 'user/delete', method: 'DELETE' })
+    }),
     changeAvatar: builder.mutation<unknown, FormData>({
       query: (body) => ({ url: 'user/updateImage', body, method: 'PATCH' })
     })
@@ -34,6 +36,6 @@ export const {
   useLazyGetCurrentUserQuery,
   useSignupMutation,
   useLoginMutation,
-  useLazyLogoutQuery,
+  useDeleteAccountMutation,
   useChangeAvatarMutation
 } = authApi;

@@ -22,6 +22,7 @@ export type loginData = z.infer<typeof loginScheme>;
 
 const LoginPage = () => {
   const [login, { isLoading }] = useLoginMutation();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -75,14 +76,16 @@ const LoginPage = () => {
         <Separator className="!w-full" />
         <h3 className="text-center">Sign in with other providers:</h3>
         <div className="flex gap-2 justify-center">
-          <Button color="gray" variant="soft">
-            <p className="pi pi-google"></p>
+          <a
+            href="http://ec2-13-60-43-26.eu-north-1.compute.amazonaws.com/oauth2/authorization/google"
+            className="pi pi-google">
             Google
-          </Button>
-          <Button color="gray" variant="soft">
-            <p className="pi pi-github"></p>
+          </a>
+          <a
+            href="http://ec2-13-60-43-26.eu-north-1.compute.amazonaws.com/oauth2/authorization/github"
+            className="pi pi-github">
             Github
-          </Button>
+          </a>
         </div>
       </div>
     </section>

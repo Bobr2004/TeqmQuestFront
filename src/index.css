@@ -2,7 +2,10 @@
 
 @import "primeicons/primeicons.css";
 
-html, body, #root, #root > div {
+html,
+body,
+#root,
+#root > div {
    height: 100%;
 }
 
@@ -14,7 +17,6 @@ html, body, #root, #root > div {
 main {
    flex-grow: 1;
 }
-
 
 button:not([data-disabled="true"]) {
    cursor: pointer !important;
@@ -71,3 +73,4 @@ button:not([data-disabled="true"]) {
    outline-style: solid;
    animation: editCardGlow 1.5s ease-in-out forwards;
 }
+

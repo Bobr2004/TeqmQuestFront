@@ -18,7 +18,7 @@ const questScheme = z.object({
    description: z
       .string()
       .nonempty("Provide quest description")
-      .max(120, "Name must be less than 120 chracters"),
+      .max(400, "Name must be less than 400 chracters"),
    time: z.number().min(1, "Provide correct time")
 });
 

@@ -7,9 +7,8 @@ function RoomPage() {
             <section className="flex flex-col gap-12 flex-grow">
                <div className="flex justify-end">
                   <Card>
-                     <h2>
-                        Room code: <b className="font-bold">SDKZ</b>
-                     </h2>
+                     <h3 className="font-bold">Host: Akagami022</h3>
+                     <p className="text-[var(--gray-10)]">Room id: 12</p>
                   </Card>
                </div>
                <h1 className="text-6xl font-bold text-center">

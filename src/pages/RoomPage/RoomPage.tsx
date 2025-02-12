@@ -17,10 +17,11 @@ import { useAppSelector } from "../../store/store";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import RoomTasks from "./RoomTasks";
+import { User } from "../../store/auth/auth.slice";
 
 const maxPlayers = 6;
 
-type Message = {
+export type Message = {
    username: string;
    message: string;
 };
@@ -30,6 +31,9 @@ const SOCKET_URL = `http://ec2-13-60-43-26.eu-north-1.compute.amazonaws.com/ws`;
 const TOPIC = (id: number) => `/topic/chat/${id}`;
 const SEND_ENDPOINT = (id: number) => `/app/chat/${id}`;
 
+const PLAYERS_TOPIC = (id: number) => `/topic/room/${id}`;
+const SEND_PLAYER = (id: number) => `/app/room/${id}`;
+
 function RoomPage() {
    const { id } = useParams();
    const [client, setClient] = useState<Client | null>(null);
@@ -37,6 +41,9 @@ function RoomPage() {
    const [messages, setMessages] = useState<Message[]>([]);
 
    const token = useAppSelector((store) => store.auth.token);
+
+   const [players, setPlayers] = useState<User[]>([]);
+
    useEffect(() => {
       const client = new Client({
          webSocketFactory: () => new SockJS(`${SOCKET_URL}?token=${token}`),
@@ -46,9 +53,20 @@ function RoomPage() {
             client.subscribe(TOPIC(Number(id)), (message) => {
                const newMessage: Message = JSON.parse(message.body);
                setMessages((prevMessages) => [...prevMessages, newMessage]);
-
-               console.log("ogo negar")
+               console.log("ogo negar");
             });
+
+            // // Players socket
+            // client.subscribe(PLAYERS_TOPIC(Number(id)), (message) => {
+            //    const playersList: User[] = JSON.parse(message.body);
+            //    setPlayers(playersList);
+            //    console.log("Ogo players list");
+            //    // console.log(playersList);
+            // });
+
+            // client.publish({
+            //    destination: SEND_PLAYER(Number(id))
+            // });
          }
       });
       client.activate();
@@ -58,7 +76,7 @@ function RoomPage() {
    const user = useAppSelector((store) => store.auth.user);
 
    const sendMessage = (message: string) => {
-      console.log("yay")
+      console.log("yay");
       if (client && client.connected) {
          client.publish({
             destination: SEND_ENDPOINT(Number(id)),
@@ -128,7 +146,7 @@ function RoomPage() {
                   </ul>
                </section>
             </div>
-            <RoomChat sendMessage={sendMessage}/>
+            <RoomChat sendMessage={sendMessage} messages={messages} />
          </div>
       );
 }

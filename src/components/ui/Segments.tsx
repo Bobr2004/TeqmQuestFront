@@ -7,14 +7,14 @@ type SegmentItem = {
 
 type SegmentsProps =
    | {
-        value: any;
-        onValueChange: (data: any) => void;
+        value?: any;
+        onValueChange?: (data: any) => void;
         items: SegmentItem[];
         stringItems?: never;
      }
    | {
-        value: any;
-        onValueChange: (data: any) => void;
+        value?: any;
+        onValueChange?: (data: any) => void;
         stringItems: string[];
         items?: never;
      };

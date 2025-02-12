@@ -12,17 +12,9 @@ import TaskCard from "./TaskCard";
 import toast from "react-hot-toast";
 import { backendAPI, routes } from "../../configs/routes";
 import { useAppSelector } from "../../store/store";
+import { minutesToHHMMSS } from "../../functions/utils";
 
-function minutesToHHMMSS(minutes: number): string {
-   // Calculate hours, minutes, and seconds
-   const hours = Math.floor(minutes / 60);
-   const remainingMinutes = Math.floor(minutes % 60);
-   const seconds = Math.floor((minutes * 60) % 60);
 
-   // Format into HH:MM:SS
-   const pad = (num: number) => String(num).padStart(2, "0");
-   return `${pad(hours)}:${pad(remainingMinutes)}:${pad(seconds)}`;
-}
 
 function EditQuestPage() {
    const { id } = useParams();
@@ -138,11 +130,9 @@ function EditQuestPage() {
             <div className="space-y-3">
                <h2 className="text-3xl font-bold text-center">{name}</h2>
                <ImageInput setImageState={setImage} />
-               <p>
-                  <span className="text-[var(--gray-10)]">{description}</span>
-               </p>
+               <p className="text-[var(--gray-10)]">{description}</p>
 
-               {time && <p>Time Limit: {time || "Not specified"}</p>}
+               {time && <p>Time Limit: {minutesToHHMMSS(time) || "Not specified"}</p>}
 
                <Modal
                   trigger={<Button variant="soft">Edit quest info</Button>}

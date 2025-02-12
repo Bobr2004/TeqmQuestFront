@@ -1,6 +1,7 @@
 import { Card, ScrollArea } from "@radix-ui/themes";
 import { Link } from "react-router";
 import { routes } from "../../configs/routes";
+import QuestRating from "../QuestPage/QuestRating";
 
 // {
 //    "id": 1,
@@ -58,13 +59,6 @@ function QuestCard({
    );
 }
 
-function QuestRating({ rating }: { rating: number }) {
-   return (
-      <div className="flex gap-1 justify-end items-center">
-         <p>{rating || "Not rated"}</p>
-         <p className="pi pi-star-fill"></p>
-      </div>
-   );
-}
+
 
 export default QuestCard;

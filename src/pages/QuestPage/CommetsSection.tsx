@@ -23,7 +23,6 @@ function CommetsSection({ id }: CommetsSectionProps) {
    const navigate = useNavigate();
 
    const [newComment, setNewComment] = useState<string>("");
-   const newCommentRef = useRef<HTMLTextAreaElement>(null);
 
    const handleAddComment = () => {
       if (!user) return void navigate(routes.login);
@@ -32,7 +31,6 @@ function CommetsSection({ id }: CommetsSectionProps) {
          addComment({ title: newComment, questId: id })
             .unwrap()
             .then(() => {
-               if (newCommentRef.current) newCommentRef.current.value = "";
                setNewComment("");
             })
             .catch(console.log);
@@ -44,7 +42,7 @@ function CommetsSection({ id }: CommetsSectionProps) {
          <div className="flex gap-2 items-stretch">
             <Avatar fallback="A" src={user?.image} size="5" />
             <TextArea
-               ref={newCommentRef}
+               value={newComment}
                onChange={(e) => setNewComment(e.target.value)}
                className="flex-grow"
             />

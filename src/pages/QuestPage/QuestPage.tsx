@@ -1,15 +1,15 @@
-import { useParams } from "react-router";
-import { useGetQuestByIdQuery } from "../../store/quest/quest.api";
+// import { useParams } from "react-router";
+// import { useGetQuestByIdQuery } from "../../store/quest/quest.api";
 import { Button, Separator, Skeleton, TextArea } from "@radix-ui/themes";
 import Modal from "../../components/ui/Modal";
-import QuestRating from "./QuestRating";
+// import QuestRating from "./QuestRating";
 import CreateRoomForm from "./CreateRoomForm";
 
 function QuestPage() {
-   const { id } = useParams();
+   // const { id } = useParams();
 
    // const { data: questData, isLoading } = useGetQuestByIdQuery(Number(id));
-   const isLoading = true;
+   // const isLoading = true;
 
    return (
       <>

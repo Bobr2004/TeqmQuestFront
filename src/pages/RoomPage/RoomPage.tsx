@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Separator, TextArea, TextField } from "@radix-ui/themes";
+import { Avatar, Button, Card, Separator, TextField } from "@radix-ui/themes";
 
 function RoomPage() {
    return (

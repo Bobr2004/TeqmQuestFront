@@ -26,7 +26,7 @@ function Layout() {
         <nav className="container p-4 mx-auto flex justify-between items-center">
           <ul className="flex gap-4 items-center">
             <h2 className="text-2xl font-bold">
-              <NavLink to={routes.home}>App Title</NavLink>
+              <NavLink to={routes.home}>Team Quest</NavLink>
             </h2>
             {user && (
               <Button asChild variant="soft">

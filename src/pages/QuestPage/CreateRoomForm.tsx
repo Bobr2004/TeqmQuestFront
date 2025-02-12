@@ -24,11 +24,14 @@ function CreateRoomForm() {
    });
 
    const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
    const closeModal = () => {
       closeButtonRef.current && closeButtonRef.current.click();
    };
 
-   const onSubmit = async () => {};
+   const onSubmit = async () => {
+      closeModal()
+   };
 
    return (
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">

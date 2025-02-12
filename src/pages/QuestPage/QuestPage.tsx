@@ -10,7 +10,7 @@ import { useParams } from "react-router";
 import { useGetQuestByIdQuery } from "../../store/quest/quest.api";
 import ImageWithLoader from "../../components/ImageWithLoader";
 import RoomCard from "./RoomCard";
-// import { useGetRoomsByQuestIDQuery } from "../../store/room/room.api";
+import { useGetRoomsByQuestIDQuery } from "../../store/room/room.api";
 
 function QuestPage() {
    const { id } = useParams();
@@ -19,8 +19,8 @@ function QuestPage() {
       Number(id)
    );
 
-   // const { data: roomsList, isLoading: isRoomsLoading } =
-   //    useGetRoomsByQuestIDQuery(Number(id));
+   const { data: roomsList, isLoading: isRoomsLoading } =
+      useGetRoomsByQuestIDQuery(Number(id));
 
    if (isQuestLoading)
       return (
@@ -60,17 +60,18 @@ function QuestPage() {
                         </h2>
                         <Modal
                            trigger={<Button className="">Create room</Button>}
-                           content={<CreateRoomForm />}
+                           content={<CreateRoomForm id={Number(id)}/>}
                         />
                      </div>
                      <ul className="grid gap-2 mt-2">
                         {/* TODO: list all rooms from api */}
-                        <li>
-                           <RoomCard id={1} isActive={true} title="Dominators room 5"/>
-                        </li>
-                        <li>
-                           <RoomCard id={2} isActive={false} title="Mega room 3"/>
-                        </li>
+                        {roomsList &&
+                           roomsList.map((room) => (
+                              <li key={room.id}>
+                                 <RoomCard {...room} />
+                              </li>
+                           ))}
+                        {roomsList?.length === 0 && <p className="text-[var(--gray-10)]">No active rooms for this quest yet</p>}
                      </ul>
                   </section>
                </div>

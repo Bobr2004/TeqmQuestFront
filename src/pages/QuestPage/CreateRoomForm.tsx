@@ -1,9 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Dialog, TextField } from "@radix-ui/themes";
-import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import ErrorFormMessage from "../../components/ErrorFormMessage";
+import { backendAPI, routes } from "../../configs/routes";
+import { useAppSelector } from "../../store/store";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 const roomScheme = z.object({
    title: z
@@ -14,7 +17,7 @@ const roomScheme = z.object({
 
 type roomData = z.infer<typeof roomScheme>;
 
-function CreateRoomForm() {
+function CreateRoomForm({ id }: { id: number }) {
    const {
       register,
       handleSubmit,
@@ -23,14 +26,21 @@ function CreateRoomForm() {
       resolver: zodResolver(roomScheme)
    });
 
-   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+   const token = useAppSelector((store) => store.auth.token);
 
-   const closeModal = () => {
-      closeButtonRef.current && closeButtonRef.current.click();
-   };
+   const navigate = useNavigate();
 
-   const onSubmit = async () => {
-      closeModal()
+   const onSubmit = async ({ title }: roomData) => {
+      try {
+         const { data } = await backendAPI(token).post(
+            `/api/room/${id}`,
+            title
+         );
+         console.log(title);
+         navigate(routes.toRoom(data.id));
+      } catch (error) {
+         toast.error(JSON.stringify(error));
+      }
    };
 
    return (
@@ -47,7 +57,7 @@ function CreateRoomForm() {
          )}
          <div className="flex justify-center gap-3 ">
             <Dialog.Close>
-               <Button variant="soft" color="gray" ref={closeButtonRef}>
+               <Button variant="soft" color="gray">
                   Cancel
                </Button>
             </Dialog.Close>

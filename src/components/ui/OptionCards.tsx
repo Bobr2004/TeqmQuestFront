@@ -7,14 +7,14 @@ type OptionItem = {
 
 type OptionsProps =
    | {
-        value: any;
-        onValueChange: (data: any) => void;
+        value?: any;
+        onValueChange?: (data: any) => void;
         items: OptionItem[];
         stringItems?: never;
      }
    | {
-        value: any;
-        onValueChange: (data: any) => void;
+        value?: any;
+        onValueChange?: (data: any) => void;
         stringItems: string[];
         items?: never;
      };

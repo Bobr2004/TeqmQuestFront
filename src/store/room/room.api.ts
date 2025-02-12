@@ -5,7 +5,6 @@ import { Quest } from "../quest/quest.api";
 export interface Room {
    id: number;
    title: string;
-   questId: number;
    username: string;
    isActive: boolean;
    quest: Quest;

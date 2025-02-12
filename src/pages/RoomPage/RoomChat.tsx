@@ -1,7 +1,11 @@
 import { Avatar, Button, ScrollArea, TextField } from "@radix-ui/themes";
 import { useState } from "react";
 
-function RoomChat() {
+type RoomChatProps = {
+   sendMessage: (message: string) => void;
+};
+
+function RoomChat({ sendMessage }: RoomChatProps) {
    const [newMessage, setNewMessage] = useState("");
    return (
       <section className="border-t md:border-l md:border-t-0 border-[var(--gray-6)] my-4 px-4 flex flex-col">
@@ -48,7 +52,14 @@ function RoomChat() {
                value={newMessage}
                onChange={(e) => setNewMessage(e.target.value)}
             />
-            <Button disabled={!newMessage}>Send</Button>
+            <Button
+               disabled={!newMessage}
+               onClick={() => {
+                  sendMessage(newMessage);
+               }}
+            >
+               Send
+            </Button>
          </div>
       </section>
    );

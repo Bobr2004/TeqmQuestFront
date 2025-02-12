@@ -16,6 +16,7 @@ import { useAppSelector } from "../../store/store";
 
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
+import RoomTasks from "./RoomTasks";
 
 const maxPlayers = 6;
 
@@ -37,17 +38,36 @@ function RoomPage() {
 
    const token = useAppSelector((store) => store.auth.token);
    useEffect(() => {
-      const stompClient = new Client({
+      const client = new Client({
          webSocketFactory: () => new SockJS(`${SOCKET_URL}?token=${token}`),
-         connectHeaders: {
-            Authorization: `Bearer ${token}`
-         },
          onConnect: () => {
             console.log("Connected oleg");
+
+            client.subscribe(TOPIC(Number(id)), (message) => {
+               const newMessage: Message = JSON.parse(message.body);
+               setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+               console.log("ogo negar")
+            });
          }
       });
-      stompClient.activate();
+      client.activate();
+      setClient(client);
    }, []);
+
+   const user = useAppSelector((store) => store.auth.user);
+
+   const sendMessage = (message: string) => {
+      console.log("yay")
+      if (client && client.connected) {
+         client.publish({
+            destination: SEND_ENDPOINT(Number(id)),
+            body: JSON.stringify({ message: message, username: user?.username })
+         });
+      } else {
+         console.error("Client is not connected");
+      }
+   };
 
    const [currentPlayers, setCurrentPlayers] = useState(0);
    const unActivePlayers = maxPlayers - currentPlayers;
@@ -55,7 +75,6 @@ function RoomPage() {
       Number(id)
    );
    console.log(roomData);
-   const user = useAppSelector((store) => store.auth.user);
 
    if (isRoomLoading)
       return (
@@ -86,6 +105,7 @@ function RoomPage() {
                         </h1>
                      </div>
                   </div>
+                  <RoomTasks id={roomData.quest.id} />
                   <div className="flex justify-center">
                      <Button
                         size="4"
@@ -108,7 +128,7 @@ function RoomPage() {
                   </ul>
                </section>
             </div>
-            <RoomChat />
+            <RoomChat sendMessage={sendMessage}/>
          </div>
       );
 }

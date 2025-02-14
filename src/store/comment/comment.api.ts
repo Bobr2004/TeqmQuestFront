@@ -5,6 +5,7 @@ export interface IComment {
   id: number;
   title: string;
   userDTO: {
+    username: string;
     id: number;
     image: string;
   };

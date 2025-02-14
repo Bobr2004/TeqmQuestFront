@@ -14,7 +14,7 @@ const questScheme = z.object({
    name: z
       .string()
       .nonempty("Provide quest name")
-      .max(15, "Name must be less than 15 chracters"),
+      .max(25, "Name must be less than 25 chracters"),
    description: z
       .string()
       .nonempty("Provide quest description")

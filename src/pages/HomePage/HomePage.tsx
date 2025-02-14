@@ -4,11 +4,12 @@ import Modal from "../../components/ui/Modal";
 import { useAppSelector } from "../../store/store";
 import QuestForm from "../../components/QuestForm";
 import { useGetAllQuestsQuery } from "../../store/quest/quest.api";
+import { Spinner } from "@radix-ui/themes";
 
 const HomePage = () => {
    const user = useAppSelector((state) => state.auth.user);
 
-   const { data: quests } = useGetAllQuestsQuery();
+   const { data: quests, isLoading } = useGetAllQuestsQuery();
 
    return (
       <section className="container mx-auto p-4">
@@ -29,8 +30,15 @@ const HomePage = () => {
                </div>
             )}
             {quests &&
-               quests.length &&
                quests.map((quest) => <QuestCard {...quest} key={quest.id} />)}
+            {quests && !quests?.length && (
+               <p className="text-lg">No public quests yet</p>
+            )}
+            {isLoading && (
+               <div className="flex justify-center">
+                  <Spinner size="3" />
+               </div>
+            )}
          </div>
       </section>
    );

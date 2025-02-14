@@ -19,8 +19,7 @@ function QuestPage() {
       Number(id)
    );
 
-   const { data: roomsList } =
-      useGetRoomsByQuestIDQuery(Number(id));
+   const { data: roomsList } = useGetRoomsByQuestIDQuery(Number(id));
 
    if (isQuestLoading)
       return (
@@ -60,7 +59,7 @@ function QuestPage() {
                         </h2>
                         <Modal
                            trigger={<Button className="">Create room</Button>}
-                           content={<CreateRoomForm id={Number(id)}/>}
+                           content={<CreateRoomForm id={Number(id)} />}
                         />
                      </div>
                      <ul className="grid gap-2 mt-2">
@@ -71,13 +70,17 @@ function QuestPage() {
                                  <RoomCard {...room} />
                               </li>
                            ))}
-                        {roomsList?.length === 0 && <p className="text-[var(--gray-10)]">No active rooms for this quest yet</p>}
+                        {roomsList?.length === 0 && (
+                           <p className="text-[var(--gray-10)]">
+                              No active rooms for this quest yet
+                           </p>
+                        )}
                      </ul>
                   </section>
                </div>
                <Separator className="!w-full !my-4" />
                <div className="grid md:grid-cols-[1fr_2fr] gap-4">
-                  <RatingSection id={Number(id)} />
+                  <RatingSection id={Number(id)} rating={questData.rating} />
 
                   <CommetsSection id={Number(id)} />
                </div>

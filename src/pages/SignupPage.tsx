@@ -113,15 +113,17 @@ const SignUpPage = () => {
         <Separator className="!w-full" />
         <h3 className="text-center">Sign in with other providers:</h3>
         <div className="flex gap-2 justify-center">
-          <Button color="gray" variant="soft">
-            <p className="pi pi-google"></p>
-            Google
-          </Button>
-          <Button color="gray" variant="soft">
-            <p className="pi pi-github"></p>
-            Github
-          </Button>
-        </div>
+               <a href="http://ec2-13-60-43-26.eu-north-1.compute.amazonaws.com/oauth2/authorization/google">
+                  <Button variant="soft" color="gray">
+                     Google <i className="pi pi-google"></i>
+                  </Button>
+               </a>
+               <a href="http://ec2-13-60-43-26.eu-north-1.compute.amazonaws.com/oauth2/authorization/github">
+                  <Button variant="soft" color="gray">
+                     Github <i className="pi pi-github"></i>
+                  </Button>
+               </a>
+            </div>
       </div>
     </section>
   );

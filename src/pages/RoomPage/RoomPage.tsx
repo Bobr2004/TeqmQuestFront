@@ -156,7 +156,7 @@ function RoomPage() {
                      {players &&
                         players.map((player) => (
                            <li key={player.id}>
-                              <PlayerCard {...player} />
+                              <PlayerCard {...player} hostname={roomData.username}/>
                            </li>
                         ))}
                      {Array.from({ length: unActivePlayers }, (_, index) => (

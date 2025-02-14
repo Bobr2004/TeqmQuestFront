@@ -40,7 +40,7 @@ function CommetsSection({ id }: CommetsSectionProps) {
       <section className="space-y-2 mb-4">
          <h2 className="font-bold text-lg">Comments:</h2>
          <div className="space-y-2">
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-stretch">
                <Avatar fallback="A" src={user?.image} size="5" />
                <TextArea
                   value={newComment}
@@ -48,16 +48,27 @@ function CommetsSection({ id }: CommetsSectionProps) {
                   className="flex-grow"
                   rows={1}
                />
+               <div className="flex flex-col items-center">
+                  <Button
+                     disabled={newComment.length === 0}
+                     onClick={handleAddComment}
+                     className=""
+                  >
+                     Comment
+                  </Button>
+                  <Button
+                     onClick={() => {
+                        setNewComment("");
+                     }}
+                     color="gray"
+                     variant="ghost"
+                     className="!mt-0.5 !px-4"
+                  >
+                     clear
+                  </Button>
+               </div>
             </div>
-            <div className="flex justify-end">
-               <Button
-                  disabled={newComment.length === 0}
-                  onClick={handleAddComment}
-                  className=""
-               >
-                  Comment
-               </Button>
-            </div>
+            <div className="flex justify-end"></div>
          </div>
 
          <div className="space-y-2 py-2">

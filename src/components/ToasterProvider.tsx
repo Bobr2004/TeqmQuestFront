@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 function ToasterProvider() {
    return (
       <Toaster
+         containerStyle={{ zIndex: "999" }}
          toastOptions={{
             style: {
                background: "var(--color-background)",

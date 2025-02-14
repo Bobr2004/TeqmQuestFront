@@ -14,9 +14,11 @@ export interface Quest {
 export const questApi = createApi({
    reducerPath: "questApi",
    baseQuery: baseQuery("/api/quests"),
+   tagTypes: ["HomePageQuests"],
    endpoints: (builder) => ({
       getAllQuests: builder.query<Quest[], void>({
-         query: () => ({ url: "" })
+         query: () => ({ url: "" }),
+         providesTags: ["HomePageQuests"]
       }),
       getQuestById: builder.query<Quest, number>({
          query: (questId) => ({ url: `/${questId}` })

@@ -34,7 +34,7 @@ function QuestPage() {
       return (
          <>
             <div className="container mx-auto p-4 h-full">
-               <div className="grid md:grid-cols-[1fr_2fr] gap-4 h-4/5">
+               <div className="grid md:grid-cols-[1fr_2fr] gap-4 h-[75%]">
                   <section className="space-y-3">
                      <h1 className="text-2xl font-bold text-center">
                         {questData.title}

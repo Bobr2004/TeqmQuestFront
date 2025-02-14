@@ -69,7 +69,13 @@ function RoomPage() {
 
             client.publish({
                destination: SEND_PLAYER(Number(id)),
-               body: ""
+               body: "/connect"
+            });
+         },
+         onDisconnect: ()=>{
+            client.publish({
+               destination: SEND_PLAYER(Number(id)),
+               body: "/disconnect"
             });
          }
       });

@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import { EditableQuest } from "./editQuestTypes";
 import EditQuestCard from "./EditQuestCard";
-import { Card, Separator, Tooltip } from "@radix-ui/themes";
+import { Separator, Spinner, Tooltip } from "@radix-ui/themes";
 import { useLocation } from "react-router";
-import { useGetQuestsByUserIdQuery } from "../../store/quest/quest.api";
+import {
+   questApi,
+   useGetQuestsByUserIdQuery
+} from "../../store/quest/quest.api";
 import { useAppSelector } from "../../store/store";
+import { backendAPI } from "../../configs/routes";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 function EditQuestsPage() {
    const location = useLocation();
    const specialQuestId = location.state?.questId;
@@ -19,21 +25,39 @@ function EditQuestsPage() {
       }
    );
 
-   const deleteLocalQuestHandler = (id: number) => () => {
+   const deleteLocalQuestHandler = (id: number) => async () => {
       setLocalQuestsState((localquests) =>
          localquests.filter((quest) => quest.id !== id)
       );
    };
 
-   useEffect(() => {
-      localStorage.setItem("localQuests", JSON.stringify(localQuestsState));
-   }, [localQuestsState]);
+   const token = useAppSelector((store) => store.auth.token);
 
    const user = useAppSelector((store) => store.auth.user);
 
    const userId = user?.id as number;
 
-   const { data: quests, isLoading } = useGetQuestsByUserIdQuery(userId);
+   const {
+      data: quests,
+      isLoading,
+      refetch
+   } = useGetQuestsByUserIdQuery(userId);
+
+   const dispatch = useDispatch();
+
+   const onDeletePubishedQuestHandler = (id: number) => async () => {
+      try {
+         await backendAPI(token).delete(`/api/quests/${id}`);
+         refetch();
+         dispatch(questApi.util.invalidateTags(["HomePageQuests"]));
+      } catch (error) {
+         toast.error(JSON.stringify(error));
+      }
+   };
+
+   useEffect(() => {
+      localStorage.setItem("localQuests", JSON.stringify(localQuestsState));
+   }, [localQuestsState]);
 
    return (
       <>
@@ -66,6 +90,11 @@ function EditQuestsPage() {
          <section className="container mx-auto p-4">
             <h2 className="font-bold text-xl">Published quests:</h2>
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full py-2">
+               {isLoading && (
+                  <div className="flex justify-center">
+                     <Spinner size="3" />
+                  </div>
+               )}
                {quests &&
                   quests.map((quest) => (
                      <EditQuestCard
@@ -74,6 +103,7 @@ function EditQuestsPage() {
                         description={quest.description}
                         id={quest.id}
                         time={Number(quest.timeLimit)}
+                        onDelete={onDeletePubishedQuestHandler(quest.id)}
                      />
                   ))}
             </ul>

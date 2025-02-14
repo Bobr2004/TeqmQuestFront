@@ -23,10 +23,10 @@ function PlayerCard({ username, image, hostname }: PlayerCardProps) {
                         Host <i className="pi pi-crown"></i>
                      </p>
                   )}
-                  <Button variant="ghost" color="gray">
+                  <Button variant="ghost" color="grass">
                      <Avatar
                         src={image}
-                        fallback={<p className="pi pi-user text-3xl"></p>}
+                        fallback={<p className="text-3xl">{username[0]}</p>}
                         size="6"
                      />
                   </Button>

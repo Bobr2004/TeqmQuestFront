@@ -2,7 +2,6 @@ import { Button, Card, Dialog, Spinner } from "@radix-ui/themes";
 import { Room } from "../../store/room/room.api";
 import { Link, useNavigate } from "react-router";
 import { routes } from "../../configs/routes";
-import toast from "react-hot-toast";
 import { useAppSelector } from "../../store/store";
 import Modal from "../../components/ui/Modal";
 import { useEffect, useState } from "react";

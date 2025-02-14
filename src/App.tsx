@@ -50,7 +50,7 @@ function App() {
   const { theme } = useAppSelector((state) => state.auth);
 
   return (
-    <Theme appearance={theme} accentColor="green">
+    <Theme appearance={theme} accentColor="grass">
       <Router />
       <ToasterProvider />
     </Theme>

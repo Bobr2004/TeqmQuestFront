@@ -59,8 +59,8 @@ function RoomPage() {
             client.subscribe(PLAYERS_TOPIC(Number(id)), (message) => {
                const playersList: User[] = JSON.parse(message.body);
                setPlayers(playersList);
-               console.log("Ogo players list");
-               console.log(playersList);
+               // console.log("Ogo players list");
+               // console.log(playersList);
             });
 
             client.publish({
@@ -96,7 +96,7 @@ function RoomPage() {
    const { data: roomData, isLoading: isRoomLoading } = useGetRoomByIdQuery(
       Number(id)
    );
-   console.log(roomData);
+   // console.log(roomData);
 
    if (isRoomLoading)
       return (

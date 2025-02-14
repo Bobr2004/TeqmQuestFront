@@ -1,5 +1,10 @@
-import { Avatar, Button, ScrollArea, TextField } from "@radix-ui/themes";
-import { useState } from "react";
+import {
+   Avatar,
+   Button,
+   ScrollArea,
+   TextField
+} from "@radix-ui/themes";
+import { useEffect, useRef, useState } from "react";
 import { Message } from "./RoomPage";
 
 type RoomChatProps = {
@@ -9,26 +14,36 @@ type RoomChatProps = {
 
 function RoomChat({ sendMessage, messages }: RoomChatProps) {
    const [newMessage, setNewMessage] = useState("");
+
+   const chatEndRef = useRef<HTMLDivElement | null>(null); // Reference to the bottom of the chat container
+
+   useEffect(() => {
+      if (chatEndRef.current) {
+         chatEndRef.current.scrollTop = chatEndRef.current.scrollHeight;
+       }
+   }, [messages]);
+
    return (
-      <section className="border-t md:border-l md:border-t-0 border-[var(--gray-6)] px-4 flex flex-col bg-[var(--accent-1)]">
+      <section className="border-t md:border-l md:border-t-0 border-[var(--gray-6)] px-4 flex flex-col bg-[var(--gray-2)]">
          <h2 className="font-bold text-lg mt-2">Room's chat:</h2>
          <div className="flex-grow flex flex-col">
-            <ScrollArea className="max-h-[75vh] py-2">
+            <ScrollArea className="min-h-[35vh] max-h-[35vh] md:max-h-[75vh]  py-2 " ref={chatEndRef}>
                <ul className="space-y-2">
-                  {messages &&
-                     messages.map((message, i) => (
-                        <li key={i}>
-                           <ChatMessage {...message} />
-                        </li>
-                     ))}
+               {messages &&
+                  messages.map((message, i) => (
+                     <li key={i}>
+                        <ChatMessage {...message} />
+                     </li>
+                  ))}
                </ul>
             </ScrollArea>
+            {/* <Separator className="!w-full"/> */}
          </div>
          <div className="mb-2 grid grid-cols-5 gap-2">
             {["👍", "🎉", "😎", "💀", "🥶"].map((smile, i) => (
                <Button
                   color="gray"
-                  variant="soft"
+                  variant="outline"
                   onClick={() => {
                      sendMessage(smile);
                   }}
@@ -60,28 +75,26 @@ function RoomChat({ sendMessage, messages }: RoomChatProps) {
 }
 
 function ChatMessage({ message, username }: Message) {
-   const usernameSymbol = username ? (
-      username[0]
-   ) : (
-      <p className="pi pi-user"></p>
-   );
+   const usernameSymbol = username[0];
 
-   function getColor(n: number): "green" | "violet" | "blue" | "red" {
-      if (n % 3 === 0) return "green";
-      if (n % 5 === 0) return "violet";
-      if (n % 2 === 0) return "blue";
+   function getColor(): "grass" | "violet" | "blue" | "red" {
+      if (username.length % 3 === 0) return "grass";
+      if (username.length % 5 === 0) return "violet";
+      if (username.length % 2 === 0) return "blue";
       return "red";
    }
 
    return (
-      <div className="flex gap-0.5">
+      <div className="flex gap-1">
          <Avatar
             fallback={usernameSymbol}
-            size="1"
-            color={getColor(username.length)}
+            size="2"
+            color={getColor()}
          />
-         <p className="mr-0.5">:</p>
-         <p className="text-[var(--gray-10)]">{message}</p>
+         <div>
+            <p className={`text-[0.75rem] ${getColor()}-ch -mt-[3px]`}>{username}</p>
+            <p className="text-[var(--gray-11)] text-sm -mt-0.5">{message}</p>
+         </div>
       </div>
    );
 }

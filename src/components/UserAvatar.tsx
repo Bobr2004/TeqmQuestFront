@@ -23,8 +23,8 @@ const UserAvatar = () => {
           </div>
         }
         content={
-          <div className="flex flex-col gap-3">
-            <p>Username: {user.username}</p>
+          <div className="flex flex-col gap-3 min-w-[145px]">
+            <p>{user.username}</p>
             <Button asChild variant="outline">
               <NavLink to={routes.settings}>
                 Settings <p className="pi pi-cog"></p>

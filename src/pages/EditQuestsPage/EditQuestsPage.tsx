@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { EditableQuest } from "./editQuestTypes";
 import EditQuestCard from "./EditQuestCard";
-import {  Separator, Tooltip } from "@radix-ui/themes";
+import { Card, Separator, Tooltip } from "@radix-ui/themes";
 import { useLocation } from "react-router";
+import { useGetQuestsByUserIdQuery } from "../../store/quest/quest.api";
+import { useAppSelector } from "../../store/store";
 function EditQuestsPage() {
    const location = useLocation();
    const specialQuestId = location.state?.questId;
@@ -26,6 +28,13 @@ function EditQuestsPage() {
    useEffect(() => {
       localStorage.setItem("localQuests", JSON.stringify(localQuestsState));
    }, [localQuestsState]);
+
+   const user = useAppSelector((store) => store.auth.user);
+
+   const userId = user?.id as number;
+
+   const { data: quests, isLoading } = useGetQuestsByUserIdQuery(userId);
+
    return (
       <>
          <section className="container mx-auto p-4">
@@ -56,6 +65,18 @@ function EditQuestsPage() {
          </div>
          <section className="container mx-auto p-4">
             <h2 className="font-bold text-xl">Published quests:</h2>
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full py-2">
+               {quests &&
+                  quests.map((quest) => (
+                     <EditQuestCard
+                        isPublished={true}
+                        name={quest.title}
+                        description={quest.description}
+                        id={quest.id}
+                        time={Number(quest.timeLimit)}
+                     />
+                  ))}
+            </ul>
          </section>
       </>
    );

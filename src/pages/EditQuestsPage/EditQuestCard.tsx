@@ -10,10 +10,11 @@ function EditQuestCard({
   name,
   description,
   time,
+  isPublished,
   onDelete
-}: EditableQuest & { onDelete: () => void; isSpecial: boolean }) {
+}: EditableQuest & { onDelete?: () => void; isSpecial?: boolean, isPublished?:  boolean }) {
   const deleteQuest = () => {
-    onDelete();
+    onDelete && onDelete();
     toast.success('Successfully deleted');
   };
 

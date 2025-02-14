@@ -97,7 +97,7 @@ function TaskForm({ addNewTask }: TaskFormProps) {
             options: options.map(({ id, ...other }) => other)
          };
       }
-      await wait(0.5);
+      await wait(0.2);
       addNewTask(taskToSubmit);
       await wait(0.1);
       toast.success("Task added");

@@ -26,7 +26,7 @@ function EditQuestCard({
       <article
          className={`${
             isSpecial ? "specialCard" : ""
-         } border border-[var(--accent-6)] py-2 px-2 rounded-[var(--radius-4)] bg-[var(--accent-2)]`}
+         } border border-[var(--gray-6)] py-2 px-2 rounded-[var(--radius-4)] bg-[var(--gray-2)]`}
       >
          <div>
             <h3 className="texx-lg font-bold">{name}</h3>

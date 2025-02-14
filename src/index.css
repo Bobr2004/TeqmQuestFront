@@ -50,29 +50,29 @@ button:not([data-disabled="true"]) {
 @keyframes editCardGlow {
    0% {
       outline-width: 0px;
-      outline-color: var(--accent-6);
-      background-color: var(--accent-2);
+      outline-color: var(--gray-6);
+      background-color: var(--gray-2);
    }
    30% {
       outline-width: 2px;
-      outline-color: var(--accent-11);
-      background-color: var(--accent-4);
+      outline-color: var(--gray-11);
+      background-color: var(--gray-4);
    }
    60% {
       outline-width: 2px;
-      outline-color: var(--accent-11);
-      background-color: var(--accent-4);
+      outline-color: var(--gray-11);
+      background-color: var(--gray-4);
    }
    100% {
       outline-width: 0px;
-      outline-color: var(--accent-6);
-      background-color: var(--accent-2);
+      outline-color: var(--gray-6);
+      background-color: var(--gray-2);
    }
 }
 
 .specialCard {
    outline-style: solid;
-   animation: editCardGlow 1.5s ease-in-out forwards;
+   animation: editCardGlow 0.75s ease-in-out forwards;
 }
 
 

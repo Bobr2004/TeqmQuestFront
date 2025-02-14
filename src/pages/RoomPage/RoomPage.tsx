@@ -1,9 +1,4 @@
-import {
-   Button,
-   Card,
-   Separator,
-   Spinner,
-} from "@radix-ui/themes";
+import { Button, Card, Separator, Spinner } from "@radix-ui/themes";
 import PlayerCard, { EmptyPlayer } from "./PlayerCard";
 import { useEffect, useState } from "react";
 import RoomChat from "./RoomChat";
@@ -15,6 +10,7 @@ import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import RoomTasks from "./RoomTasks";
 import { User } from "../../store/auth/auth.slice";
+import NotFoundPage from "../NotFoundPage";
 
 const maxPlayers = 6;
 
@@ -72,7 +68,7 @@ function RoomPage() {
                body: "/connect"
             });
          },
-         onDisconnect: ()=>{
+         onDisconnect: () => {
             client.publish({
                destination: SEND_PLAYER(Number(id)),
                body: "/disconnect"
@@ -110,6 +106,9 @@ function RoomPage() {
             </section>
          </>
       );
+
+   if (!roomData) return <NotFoundPage />;
+
    if (roomData)
       return (
          <div className="grid md:grid-cols-[3fr_1fr] h-full gap-2">
@@ -162,7 +161,10 @@ function RoomPage() {
                      {players &&
                         players.map((player) => (
                            <li key={player.id}>
-                              <PlayerCard {...player} hostname={roomData.username}/>
+                              <PlayerCard
+                                 {...player}
+                                 hostname={roomData.username}
+                              />
                            </li>
                         ))}
                      {Array.from({ length: unActivePlayers }, (_, index) => (

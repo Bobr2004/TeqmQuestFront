@@ -19,6 +19,12 @@ import { minutesToHHMMSS } from "../../functions/utils";
 function EditQuestPage() {
    const { id } = useParams();
 
+   const user = useAppSelector((store) => store.auth.user);
+   const navigate = useNavigate();
+   useEffect(() => {
+      if (!user) navigate(routes.home);
+   }, []);
+
    const [localQuestsState, setLocalQuestsState] = useState<EditableQuest[]>(
       () => {
          const localQuestsString = localStorage.getItem("localQuests");
@@ -68,7 +74,6 @@ function EditQuestPage() {
 
    const [isPublishing, setIsPublishing] = useState<string | null>(null);
 
-   const navigate = useNavigate();
 
    const publish = async () => {
       // TODO: validation

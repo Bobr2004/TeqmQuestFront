@@ -1,4 +1,4 @@
-import { Avatar, Button, Tooltip } from "@radix-ui/themes";
+import { Avatar, Button} from "@radix-ui/themes";
 import { useAppSelector } from "../../store/store";
 import Popup from "../../components/ui/Popup";
 import toast from "react-hot-toast";

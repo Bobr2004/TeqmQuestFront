@@ -22,7 +22,7 @@ function Layout() {
 
   return (
     <>
-      <header className="bg-[var(--accent-1)] border-b border-[var(--gray-6)]">
+      <header className="bg-[var(--gray-2)] border-b border-[var(--gray-6)]">
         <nav className="container p-4 mx-auto flex items-center flex-wrap justify-center sm:justify-between gap-4">
           <ul className="flex gap-4 items-center">
             <h2 className="text-2xl font-bold">

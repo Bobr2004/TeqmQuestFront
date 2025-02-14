@@ -11,6 +11,9 @@ import { useGetQuestByIdQuery } from "../../store/quest/quest.api";
 import ImageWithLoader from "../../components/ImageWithLoader";
 import RoomCard from "./RoomCard";
 import { useGetRoomsByQuestIDQuery } from "../../store/room/room.api";
+import { useAppSelector } from "../../store/store";
+import toast from "react-hot-toast";
+import NotFoundPage from "../NotFoundPage";
 
 function QuestPage() {
    const { id } = useParams();
@@ -21,6 +24,8 @@ function QuestPage() {
 
    const { data: roomsList } = useGetRoomsByQuestIDQuery(Number(id));
 
+   const user = useAppSelector((store) => store.auth.user);
+
    if (isQuestLoading)
       return (
          <>
@@ -29,6 +34,8 @@ function QuestPage() {
             </section>
          </>
       );
+
+   if (!questData) return <NotFoundPage />;
 
    if (questData)
       return (
@@ -57,10 +64,20 @@ function QuestPage() {
                         <h2 className="font-bold text-lg">
                            Browse Public Rooms:
                         </h2>
-                        <Modal
-                           trigger={<Button className="">Create room</Button>}
-                           content={<CreateRoomForm id={Number(id)} />}
-                        />
+                        {user ? (
+                           <Modal
+                              trigger={<Button>Create room</Button>}
+                              content={<CreateRoomForm id={Number(id)} />}
+                           />
+                        ) : (
+                           <Button
+                              onClick={() => {
+                                 toast.error("You are not logged in!");
+                              }}
+                           >
+                              Create room
+                           </Button>
+                        )}
                      </div>
                      <ul className="grid gap-2 mt-2">
                         {/* TODO: list all rooms from api */}

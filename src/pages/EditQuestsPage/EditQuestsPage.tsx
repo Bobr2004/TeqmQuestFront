@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { EditableQuest } from "./editQuestTypes";
 import EditQuestCard from "./EditQuestCard";
 import { Separator, Spinner, Tooltip } from "@radix-ui/themes";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import {
    questApi,
    useGetQuestsByUserIdQuery
 } from "../../store/quest/quest.api";
 import { useAppSelector } from "../../store/store";
-import { backendAPI } from "../../configs/routes";
+import { backendAPI, routes } from "../../configs/routes";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 function EditQuestsPage() {
@@ -34,6 +34,10 @@ function EditQuestsPage() {
    const token = useAppSelector((store) => store.auth.token);
 
    const user = useAppSelector((store) => store.auth.user);
+   const navigate = useNavigate();
+   useEffect(() => {
+      if (!user) navigate(routes.home);
+   }, []);
 
    const userId = user?.id as number;
 
